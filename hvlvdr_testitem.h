@@ -1,0 +1,23 @@
+//TNO,TESTNAME				, TEST FUNC	hvarg={   mmode,         vih,       u_lmt,    u_onoff  l_lmt,    l_onoff, test  exp_f,exp_hf,exp_lf
+{ 150, "HVLVDR  DC VM PASS-MID"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	  10,       10+0.28,  UT_ON,   10-0.28,  UT_ON,   "DC",    0,    0,    0}}},
+{ 151, "HVLVDR  DC VM PASS-MRANGE-MAX"	, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	  29.29,    30,       UT_ON,   30-1.40,  UT_ON,   "DC",    0,    0,    0}}},
+{ 152, "HVLVDR  DC VM PASS-MRANGE-MIN"	, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	 -9.72,    -10+0.56,  UT_ON,  -10,       UT_ON,   "DC",    0,    0,    0}}},
+{ 153, "HVLVDR  DC VM PASS-DRLEVEL-MAX",  hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,   30,       30,       UT_ON,   30-0.70,  UT_ON,   "DC",    0,    0,    0}}},
+{ 154, "HVLVDR  DC VM PASS-DRLEVEL-MIN",  hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,  -10,      -10+0.28,  UT_ON,  -10,       UT_ON,   "DC",    0,    0,    0}}},
+{ 155, "HVLVDR  DC VM H-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,   30,       30-0.70,  UT_ON,    0,  	 UT_OFF,  "DC",    1,    1,    0}}},
+{ 156, "HVLVDR  DC VM L-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,  -10,        0,       UT_OFF, -10+0.28,  UT_ON,   "DC",    1,    0,    1}}},
+{ 160, "HVLVDR  DC IM PASS"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,       40e-6,    UT_ON,  -40e-6,    UT_ON,   "DC",    0,    0,    0}}},
+{ 161, "HVLVDR  DC IM H-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,      -40e-6,    UT_ON,    0,       UT_OFF,  "DC",    1,    1,    0}}},
+{ 162, "HVLVDR  DC IM L-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,        0,       UT_OFF,  40e-6,    UT_ON,   "DC",    1,    0,    1}}},
+
+{ 170, "HVLVDR ADC VM PASS-MID"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	  10,       10+0.28,  UT_ON,   10-0.28,  UT_ON,  "ADC",    0,    0,    0}}},
+{ 171, "HVLVDR ADC VM PASS-MRANGE-MAX"	, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	  30-0.70,  30,       UT_ON,   30-1.40,  UT_ON,  "ADC",    0,    0,    0}}},
+{ 172, "HVLVDR ADC VM PASS-MRANGE-MIN"	, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,	 -10+0.28, -10+0.56,  UT_ON,  -10,       UT_ON,  "ADC",    0,    0,    0}}},
+{ 173, "HVLVDR ADC VM PASS-DRLEVEL-MAX",  hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,   30,       30,       UT_ON,   30-0.70,  UT_ON,  "ADC",    0,    0,    0}}},
+{ 174, "HVLVDR ADC VM PASS-DRLEVEL-MIN",  hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,  -10,      -10+0.28,  UT_ON,  -10,       UT_ON,  "ADC",    0,    0,    0}}},
+{ 175, "HVLVDR ADC VM H-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,   30,       30-0.70,  UT_ON,    0,  	 UT_OFF, "ADC",    1,    1,    0}}},
+{ 176, "HVLVDR ADC VM L-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_VM,  -10,        0,       UT_OFF, -10+0.28,  UT_ON,  "ADC",    1,    0,    1}}},
+{ 180, "HVLVDR ADC IM PASS"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,       40e-6,    UT_ON,  -40e-6,    UT_ON,  "ADC",    0,    0,    0}}},
+{ 181, "HVLVDR ADC IM H-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,      -40e-6,    UT_ON,    0,       UT_OFF, "ADC",    1,    1,    0}}},
+{ 182, "HVLVDR ADC IM L-FAIL"		, hvlvdr_check,	{.hvarg={ UT_HVLVDR_IM,   10,        0,       UT_OFF,  40e-6,    UT_ON,  "ADC",    1,    0,    1}}},
+
