@@ -1,0 +1,63 @@
+//socket : t5835_4dut_bit32_4fb_4ch.soc
+
+//  TNO , TEST_NAME                                            , Function ,   struct     {ilmode, mpat                       , pc   , rate    , afmxfer_cnt , limit , sector , dutchcnt , dutch , dutgroup , funblk , ubmcond , ubmjugde}  
+// 	{21000, "ECC Counter->FCSM<dutch0> 1way,sec1             " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_full.mpa"        , 0x000, 100e-9  , 0x100000-1  , 128   , 1      , 4        , 0     , 0        , 1      , 0       , 0}}},
+//  {21001, "ECC Counter->FCSM<dutch0> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 4        , 0     , 0        , 1      , 0       , 0}}},
+//  {21002, "ECC Counter->FCSM<dutch1> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 4        , 1     , 0        , 2      , 0       , 0}}},
+//  {21003, "ECC Counter->FCSM<dutch2> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 4        , 2     , 0        , 3      , 0       , 0}}},
+//  {21004, "ECC Counter->FCSM<dutch3> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 4        , 3     , 0        , 4      , 0       , 0}}},
+//  {21005, "ECC Counter->FCSM<dutch0> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 4        , 0     , 0        , 1      , 0       , 0}}},
+//  {21006, "ECC Counter->FCSM<dutch1> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 4        , 1     , 0        , 2      , 0       , 0}}},
+//  {21007, "ECC Counter->FCSM<dutch2> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 4        , 2     , 0        , 3      , 0       , 0}}},
+//  {21008, "ECC Counter->FCSM<dutch3> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 4        , 3     , 0        , 4      , 0       , 0}}},
+
+    {21009, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 0     , 0       , 1       , 0       , 0}}},
+    {21010, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 1     , 0       , 2       , 0       , 0}}},
+    {21011, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 2     , 0       , 3       , 0       , 0}}},
+    {21012, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 3     , 0       , 4       , 0       , 0}}},
+    {21013, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 0     , 1       , 1       , 0       , 0}}},
+    {21014, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 1     , 1       , 2       , 0       , 0}}},
+    {21015, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 2     , 1       , 3       , 0       , 0}}},
+    {21016, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 4        , 3     , 1       , 4       , 0       , 0}}},
+
+	{21017, "MATCH  Flash Counter<dutch0,funblk1> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 0     , 0       , 1       , 1       , 1}}},
+	{21018, "MATCH  Flash Counter<dutch1,funblk2> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 1     , 0       , 2       , 1       , 2}}},
+	{21019, "MATCH  Flash Counter<dutch2,funblk3> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 2     , 0       , 3       , 1       , 3}}},
+	{21020, "MATCH  Flash Counter<dutch3,funblk4> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 3     , 0       , 4       , 1       , 4}}},
+	{21021, "MATCH  Flash Counter<dutch0,funblk1> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 0     , 0       , 1       , 1       , 1}}},
+	{21022, "MATCH  Flash Counter<dutch1,funblk2> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 1     , 0       , 2       , 1       , 2}}},
+	{21023, "MATCH  Flash Counter<dutch2,funblk3> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 2     , 0       , 3       , 1       , 3}}},
+	{21024, "MATCH  Flash Counter<dutch3,funblk4> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 4        , 3     , 0       , 4       , 1       , 4}}},
+                                                                                                                                                       
+	{21025, "MATCH  Flash MaxFail<dutch0,funblk1> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 0     , 0       , 1       , 2       , 5}}},
+	{21026, "MATCH  Flash MaxFail<dutch1,funblk2> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 1     , 0       , 2       , 2       , 6}}},
+	{21027, "MATCH  Flash MaxFail<dutch2,funblk3> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 2     , 0       , 3       , 2       , 7}}},
+	{21028, "MATCH  Flash MaxFail<dutch3,funblk4> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 3     , 0       , 4       , 2       , 8}}},
+	{21029, "MATCH  Flash MaxFail<dutch0,funblk1> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 0     , 0       , 1       , 2       , 5}}},
+	{21030, "MATCH  Flash MaxFail<dutch1,funblk2> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 1     , 0       , 2       , 2       , 6}}},
+	{21031, "MATCH  Flash MaxFail<dutch2,funblk3> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 2     , 0       , 3       , 2       , 7}}},
+	{21032, "MATCH  Flash MaxFail<dutch3,funblk4> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 4        , 3     , 0       , 4       , 2       , 8}}},
+
+
+//socket : t5835_4dut_bit16_1fb_2ch.soc
+//  TNO , TEST_NAME                                            , Function ,   struct     {ilmode, mpat                       , pc   , rate    , afmxfer_cnt , limit , sector , dutchcnt , dutch , dutgroup , funblk , ubmcond , ubmjugde}  
+//	{21033, "ECC Counter->FCSM<dutch0> 1way,sec1             " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_full.mpa"        , 0x000, 100e-9  , 0x100000-1  , 128   , 1      , 2        , 0     , 0        , 1      , 0       , 0}}}, 
+//	{21034, "ECC Counter->FCSM<dutch0> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 2        , 0     , 0        , 1      , 0       , 0}}},
+//  {21035, "ECC Counter->FCSM<dutch1> 1way,sec16            " , multich_fcsm_test, {.multicharg={1     , "pat_fcsm_sec16.mpa"       , 0x000, 100e-9  , 0x1000      , 128   , 16     , 2        , 1     , 0        , 1      , 0       , 0}}},
+//  {21036, "ECC Counter->FCSM<dutch0> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 2        , 0     , 0        , 1      , 0       , 0}}},
+//  {21037, "ECC Counter->FCSM<dutch1> 8way,sec16            " , multich_fcsm_test, {.multicharg={8     , "pat_fcsm_sec16_8way.mpa"  , 0x000, 370e-12 , 0x1000      , 128   , 16     , 2        , 1     , 0        , 1      , 0       , 0}}},
+
+    {21038, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 2        , 0     , 0        , 1      , 0       , 0}}},
+    {21039, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A1> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 2        , 1     , 0        , 1      , 0       , 0}}},
+    {21040, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 2        , 0     , 1        , 1      , 0       , 0}}},
+    {21041, "BBM FAIL CAPTURE ECC(OR,SEC16), 3 BLK FAIL <A2> " , multich_bbm_test , {.multicharg={1     , "pat_bbm_16sec.mpa"        , 0x000, 100e-9  , 0x0         , 255   , 16     , 2        , 1     , 1        , 1      , 0       , 0}}},
+
+	{21042, "MATCH  Flash Counter<dutch0,funblk1> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 2        , 0     , 0       , 1       , 1       , 1}}},
+	{21043, "MATCH  Flash Counter<dutch1,funblk2> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 2        , 1     , 0       , 1       , 1       , 2}}},
+	{21044, "MATCH  Flash Counter<dutch0,funblk1> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 2        , 0     , 0       , 1       , 1       , 1}}},
+	{21045, "MATCH  Flash Counter<dutch1,funblk2> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 100   , 0      , 2        , 1     , 0       , 1       , 1       , 2}}},
+                                                                                                                                                       
+	{21046, "MATCH  Flash MaxFail<dutch0,funblk1> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 2        , 0     , 0       , 1       , 2       , 5}}},
+	{21047, "MATCH  Flash MaxFail<dutch1,funblk2> 1way       " , multich_flash_test,{.multicharg={1     , "pat_ff_match_01_1way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 2        , 1     , 0       , 1       , 2       , 6}}},
+	{21048, "MATCH  Flash MaxFail<dutch0,funblk1> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 2        , 0     , 0       , 1       , 2       , 5}}},
+	{21049, "MATCH  Flash MaxFail<dutch1,funblk2> 8way       " , multich_flash_test,{.multicharg={8     , "pat_ff_match_01_8way.mpa" , 0x000, 1e-6    , 0x0         , 20    , 0      , 2        , 1     , 0       , 1       , 2       , 6}}},
