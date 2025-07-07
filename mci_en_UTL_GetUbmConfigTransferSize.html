@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_GetUbmConfigTransferCycle.html">[Prev]</A>
+<A HREF="mci_en_ubm1.3.2.html">[Next]</A>
+<HR>
+<h1><a name="UTL_GetUbmConfigTransferSize">UTL_GetUbmConfigTransferSize --- Obtaining the Number of Data Items to Be Transferred to FM, which Has Been Set to the Handle</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+int <a href="../../../ATFSsys/html/en/mci_en_UTL_GetUbmConfigTransferSize.html">UTL_GetUbmConfigTransferSize</a>(UbmConfigHandle h, RadioButton *TransferSize);
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h            : UbmConfigHandle
+</p>
+<p>
+TransferSize : Pointer of the variable in which the number of data items to be transferred to FM is stored
+</p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<ul><li>
+    <p>
+    1 : The data has been read successfully.
+    </p>
+    </li><li><p>
+    0 : The data does not exist in the handle.
+    </p>
+    </li><li><p>
+    -1 : Failed to read the data. (An error occurred.)
+    </p>
+</li></ul>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to obtain the number of data items to be transferred to FM, which has been set to the handle.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If an incorrect handle is specified, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained. (No change)
+    </p>
+    </li><li><p>
+    The number of data items to be transferred to FM, which was obtained from UbmConfigHandle, has been stored in the argument.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_GetUbmConfigTransferCycle.html">[Prev]</A>
+<A HREF="mci_en_ubm1.3.2.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

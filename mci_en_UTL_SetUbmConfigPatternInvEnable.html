@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigStrbChannel.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigDdrMode.html">[Next]</A>
+<HR>
+<h1><a name="UTL_SetUbmConfigPatternInvEnable">UTL_SetUbmConfigPatternInvEnable --- Switching of Pattern Inverter</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigPatternInvEnable.html">UTL_SetUbmConfigPatternInvEnable</a>( UbmConfigHandle h, CheckButton onoff );
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h     :  UbmConfigHandle
+</p>
+<p>
+onoff : Inhibits or enables pattern outputs. Select from one of the following:
+</p>
+<ul><li>
+    <p>
+    UT_OFF -- Enables pattern outputs
+    </p>
+    </li><li><p>
+    UT_ON  -- Inhibits pattern outputs.
+    </p>
+</li></ul>
+<p><a name="ubm1.3.3.30_itbl_1"><table border="1" width="80%">
+<caption></caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Values that can be set</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5831</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">UT_OFF</td></tr>
+<tr><td valign="middle">T5503HS2</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5503HS</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">W5320</td><td valign="middle">UT_OFF</td></tr>
+
+</a></table></p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This is a switch of pattern inverter for UBM.
+</p>
+<p>
+When a value other than UT_ON or UT_OFF is specified here,  This MCI considers UT_ON to have been selected.
+</p>
+<p>
+The initial value set is UT_OFF.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If the specified handle is incorrect, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained.(No change)
+    </p>
+    </li><li><p>
+    The PatternInvEnable have been set to the UbmConfig handle.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigStrbChannel.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigDdrMode.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

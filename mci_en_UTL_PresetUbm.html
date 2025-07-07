@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.5.3.html">[Up]</A>
+<A HREF="mci_en_UTL_WriteUbmAllDut.html">[Prev]</A>
+<A HREF="mci_en_ubm1.5.4.html">[Next]</A>
+<HR>
+<h1><a name="UTL_PresetUbm">UTL_PresetUbm --- Presetting the Universal Buffer Memory by Using the Value in the Argument</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_PresetUbm.html">UTL_PresetUbm</a>( UbmAccessHandle h, USlider n );
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h : UbmAccessHandle
+</p>
+<p>
+n : Value that is used for the preset
+</p>
+<p><a name="ubm1.5.3.3_itbl_1"><table border="1" width="80%">
+<caption>Setting range for Preset Value.</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Range</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5831</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5503HS2</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5503HS</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">W5320</td><td valign="middle">0 or 1</td></tr>
+
+</a></table></p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to preset the whole universal buffer memory area by using the value in the n argument.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If the specified handle is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the specified preset value is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the ALPG is not stopped (operating or paused), a runtime error occurs.
+    For the T5503HS2, a runtime error occurs only if the ALPG is operating.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmAccessHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmAccessHandle has been obtained.(No change)
+    </p>
+    </li><li><p>
+    The universal buffer memory has been preset by using the n value.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.5.3.html">[Up]</A>
+<A HREF="mci_en_UTL_WriteUbmAllDut.html">[Prev]</A>
+<A HREF="mci_en_ubm1.5.4.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

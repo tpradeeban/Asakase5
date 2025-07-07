@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.details.html">[Up]</A>
+<A HREF="mci_en_UTL_SetFailFilterConfigColumnStartAddressBit.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetFailFilterConfigDdrMode.html">[Next]</A>
+<HR>
+<h1><a name="UTL_SetFailFilterConfigColumnAddress">UTL_SetFailFilterConfigColumnAddress --- Storing the column address value in the FailFilterConfig handle</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigColumnAddress.html">UTL_SetFailFilterConfigColumnAddress</a>(FailFilterConfigHandle h, USlider *addr, USlider cnt);
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    h: A FailFilterConfig handle
+    </p>
+    </li><li><p>
+    addr: The pointer to an array to store the column address values
+    </p>
+    </li><li><p>
+    cnt: The number of array elements of the addr argument
+    </p>
+</li></ul>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None.
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to set in a FailFilterConfig handle an array that can be used to specify the order in which addresses are to be accessed in the UBM.
+If not specified, the UBM addresses are accessed sequentially, starting at zero.
+</p>
+<p>
+This MCI should be used only when UT_FF_UBM or UT_FF_UBM_PLUS_FC is specified by <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAction.html">UTL_SetFailFilterConfigAction</a>().
+</p>
+<p>
+When a handle is obtained, no array is set as the initial value.
+</p>
+<p>
+Refer to <a href="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnAddress.html">Example of using UTL_SetFailFilterConfigColumnAddress()</a>.
+</p>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+When this MCI is used, be aware that the counters assigned for ECC and RR regions will not be properly configured and the counts will not be correct.
+Instead, failures need to be counted manually from the data read back from the Fail DB.
+</p>
+</strong></td></tr></table></a></p></center>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    A runtime error occurs if the specified FailFilterConfig handle is incorrect.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    The variable area of the addr argument must hold the size of the cnt argument.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    The column address value is set in the FailFilterConfig handle.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ffc.details.html">[Up]</A>
+<A HREF="mci_en_UTL_SetFailFilterConfigColumnStartAddressBit.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetFailFilterConfigDdrMode.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

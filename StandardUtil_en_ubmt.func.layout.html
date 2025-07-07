@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite Standard Utility Tool Operation Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+<HR>
+<A HREF="StandardUtil_en_ubmt.func.html">[Up]</A>
+<A HREF="StandardUtil_en_ubmt.func.edit.html">[Prev]</A>
+<A HREF="StandardUtil_en_ubmt.func.layout.DUTsplit.html">[Next]</A>
+<HR>
+<h1><a name="ubmt.func.layout">Setting Layout of UBM Data Display Area</a></h1>
+
+<p>
+To set layout of the UBM data display area, perform the following procedure:
+</p>
+<p>
+( Operation procedure)
+</p>
+<ol><li>
+    <p>
+    Select [Layout Setting...] from the [View] menu of the main window to display the [Layout Setting...] dialog box.
+    </p>
+    <p><center><a name="StandardUtil_UBMT_LayoutSettingDialog_000"><img src="../../image/StandardUtil_UBMT_LayoutSettingDialog_000.png"></a><br>UBM Tool: Layout Setting</center><p>
+    </li><li><p>
+    Specify the following data in the [Layout Setting] dialog box:
+    </p>
+    <ul><li>
+        <p>
+        [Split Size]
+        </p>
+        <p>
+        Set the split size when splitting and displaying UBM data.
+        </p>
+        <p>
+        When the following number of channels or DUT split is set, data is split and displayed for each size specified here.
+        </p>
+        </li><li><p>
+        [Channel Count]
+        </p>
+        <p>
+        Set the number of channels when splitting and displaying UBM data for each channel.
+        </p>
+        <p>
+        The data is split in the number of channels specified here and displayed.
+        </p>
+        <p>
+        Available values are 1, 2, and 4.
+        </p>
+        </li><li><p>
+        [Start Address]
+        </p>
+        <p>
+        Set the start address to read UBM data.
+        </p>
+        <p>
+        Enter a hexadecimal number without symbol.
+        </p>
+        </li><li><p>
+        [Stop Address]
+        </p>
+        <p>
+        Set the end address to read UBM data.
+        </p>
+        <p>
+        Enter a hexadecimal number without symbol.
+        </p>
+    </li></ul>
+    </li><li><p>
+    To set the entered value, click the [OK] button. To cancel, click the [Cancel] button.
+    </p>
+</li></ol>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<ul><li>
+    <p>
+    A layout cannot be set when FIFO_2BANK is specified for the capture mode.
+    </p>
+    </li><li><p>
+    If [Start Address] or [Stop Address] is changed, the displayed UBM data is cleared.
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<HR>
+<A HREF="StandardUtil_en_ubmt.func.html">[Up]</A>
+<A HREF="StandardUtil_en_ubmt.func.edit.html">[Prev]</A>
+<A HREF="StandardUtil_en_ubmt.func.layout.DUTsplit.html">[Next]</A>
+<HR>
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigJumpCycle.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigPmMode.html">[Next]</A>
+<HR>
+<h1><a name="UTL_ClearUbmConfigJumpAddr">UTL_ClearUbmConfigJumpAddr --- Clearing the Universal Buffer Memory Jump Address and Cycle</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearUbmConfigJumpAddr.html">UTL_ClearUbmConfigJumpAddr</a>( UbmConfigHandle h, RadioButton sel, RadioButton IndexNo);
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h              : UbmConfigHandle
+</p>
+<p>
+sel            : Universal buffer memory function Specify either of the following values:
+</p>
+<pre>
+   For more information, refer to <a href="mci_en_ubm1.3.2.1.html">&quot;Setting range for FunctionSelect&quot;</a>.
+</pre>
+<p>
+IndexNo        : Jump address index number
+</p>
+<pre>
+   For more information, refer to <a href="mci_en_ubm1.3.2.4.html">&quot;Setting range for index No&quot;</a>.
+</pre>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to clear the jump address and cycle which were added to the UbmConfig handle by using the following MCIs:
+</p>
+<ul><li>
+    <p>
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigJumpAddr.html">UTL_SetUbmConfigJumpAddr</a>()
+    </p>
+    </li><li><p>
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigJumpCycle.html">UTL_SetUbmConfigJumpCycle</a>()
+    </p>
+</li></ul>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If the specified handle is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the specified universal buffer memory function is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the specified index number is incorrect, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained.(No change)
+    </p>
+    </li><li><p>
+    No jump address and cycle have been set in the IndexNo argument.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigJumpCycle.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigPmMode.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

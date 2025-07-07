@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigTransferCycle.html">[Prev]</A>
+<A HREF="mci_en_UTL_SendUbmConfig.html">[Next]</A>
+<HR>
+<h1><a name="UTL_SetUbmConfigTransferSize">UTL_SetUbmConfigTransferSize --- Setting the Number of Data Items to Be Transferred to FM</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigTransferSize.html">UTL_SetUbmConfigTransferSize</a>( UbmConfigHandle h, USlider TransferSize );
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h            :  UbmConfigHandle
+</p>
+<p>
+TransferSize : Number of data items to be transferred to FM. Specify it within the following ranges:
+</p>
+<p><a name="UTL_SetUbmConfigTransferSize_tb1"><table border="1" width="80%">
+<caption>Range of TransferSize</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0"><a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigCaptureMode.html">UTL_SetUbmConfigCaptureMode</a></td><td valign="middle" bgcolor="#D8FEF0">Range</td></tr>
+<tr><td valign="middle">UT_UBM_NORMAL</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">UT_UBM_FIFO</td><td valign="middle">0 to 147456</td></tr>
+<tr><td valign="middle">UT_UBM_FIFO_2BANK</td><td valign="middle">0 to 73728</td></tr>
+
+</a></table></p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to set the number of data items to be transferred from UBM to FM, to the UbmConfig handle.
+</p>
+<p>
+Obtain the number of data items to be specified here, as follows:
+</p>
+<pre>
+  Number of data items = PageSize + StatusBytes
+</pre>
+<p>
+For more information on each item, refer to descriptions of the following FailFilerConfig handles:
+</p>
+<ul><li>
+    <p>
+     <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPageSize.html">UTL_SetFailFilterConfigPageSize</a>()
+    </p>
+    </li><li><p>
+     <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigStatusBytes.html">UTL_SetFailFilterConfigStatusBytes</a>()
+    </p>
+</li></ul>
+<p>
+The initial value when the handle is obtained is 0.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If an incorrect handle is specified, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained. (No change)
+    </p>
+    </li><li><p>
+    The number of data items to be transferred to FM has been set to the UbmConfig handle.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigTransferCycle.html">[Prev]</A>
+<A HREF="mci_en_UTL_SendUbmConfig.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

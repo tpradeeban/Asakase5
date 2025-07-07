@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite Standard Utility Tool Operation Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+<HR>
+<A HREF="StandardUtil_en_fmm.cui.html">[Up]</A>
+<A HREF="StandardUtil_en_fmm.cui.html">[Prev]</A>
+<A HREF="StandardUtil_en_plst.html">[Next]</A>
+<HR>
+<h1><a name="fmm.cui.fsfmm">fsfmm</a></h1>
+
+<ol><li>
+    <p>
+    Outline
+    </p>
+    <p>
+    The fsfmm command is used to display the operating condition of each memory unit such as the FCM and CFM <a href="StandardUtil_en_fmm.overview.fmcondition.html">(FM Condition)</a>.
+    </p>
+    <p>
+    FM conditions can also be saved in a file.
+    </p>
+    </li><li><p>
+    Format
+    </p>
+    <p><a name="fsdcmt.format"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+   % fsfmm [ --session &lt;session_id&gt; ] \
+           [ --station &lt;station_number&gt; ] \
+           [ --site &lt;site_number&gt; ] \
+           [ --unit &lt;unit_name&gt; ] \
+           [ --output-file &lt;file_name&gt; ] \
+           [ -h ]
+
+
+    </samp></pre></td></tr></table></a></p>
+    </li><li><p>
+    Basic functions
+    </p>
+    <p>
+    This command is used to display FM conditions.
+    </p>
+    <p>
+    The following shows an example of use:
+    </p>
+    <p><a name="fsfmm.function.nooption"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+   % fsfmm
+
+
+    </samp></pre></td></tr></table></a></p>
+    <ul><li>
+        <p>
+        --session &lt;session_id&gt;
+        </p>
+        <p>
+        Specify the session ID that uses the command.
+        </p>
+        <p>
+        For example, when executing this command with the session user_1, enter the following command:
+        </p>
+        <p><a name="fsfmm.function.session"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+  % fsfmm --session user_1
+
+
+        </samp></pre></td></tr></table></a></p>
+        <p>
+        About the case of omitting this option, refer to &quot;<a href="StandardUtil_en_standardutil.session.html">Specifying the Session ID</a>&quot;.
+        </p>
+        </li><li><p>
+        --station &lt;station_number&gt;
+        </p>
+        <p>
+        Specify a target station number.
+        </p>
+        <p>
+        If this option is omitted, the command is executed assuming that the smallest usable station number has been specified.
+        </p>
+        <p>
+        To execute the command targeting Station 1, enter the command as follows:
+        </p>
+        <p><a name="fsfmm.function.station"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+  % fsfmm --station 1
+
+
+        </samp></pre></td></tr></table></a></p>
+        </li><li><p>
+        --site &lt;site_number&gt;
+        </p>
+        <p>
+        Specify the target site number.
+        </p>
+        <p>
+        If this option is omitted, the command is processed assuming that the smallest usable site number has been specified.
+        </p>
+        <p>
+        To execute for Site 6, enter the following command:
+        </p>
+        <p><a name="fsfmm.function.site"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+  % fsfmm --site 6
+
+
+        </samp></pre></td></tr></table></a></p>
+        </li><li><p>
+        --unit &lt;unit_name&gt;
+        </p>
+        <p>
+        Specify the target unit.
+        </p>
+        <p>
+        The following unit names can be specified in &lt;unit_name&gt;.
+        </p>
+        <p><a name="T6_2_1"><table border="1" width="80%">
+<caption>fsfmm: --unit option</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Unit name</td><td valign="middle" bgcolor="#D8FEF0">Description</td></tr>
+<tr><td valign="middle">fcm</td><td valign="middle">Displays the FCM condition.</td></tr>
+<tr><td valign="middle">cfm</td><td valign="middle">Displays the CFM condition.</td></tr>
+<tr><td valign="middle">pm</td><td valign="middle">Displays the PM condition.</td></tr>
+<tr><td valign="middle">dfm</td><td valign="middle">Displays the DFM condition.</td></tr>
+<tr><td valign="middle">ubm</td><td valign="middle">Displays the UBM condition.</td></tr>
+<tr><td valign="middle">ff</td><td valign="middle">Displays the FF condition.</td></tr>
+<tr><td valign="middle">dbm</td><td valign="middle">Displays the DBM condition.</td></tr>
+
+</a></table></p>
+        <p>
+        If this option is omitted, the command is processed assuming that all units that can be specified have been specified.
+        </p>
+        <p>
+        To execute for FCM, enter the following command:
+        </p>
+        <p><a name="fsfmm.function.unit"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+  % fsfmm --unit FCM
+
+        </samp></pre></td></tr></table></a></p>
+        </li><li><p>
+        --output-file &lt;file_name&gt;
+        </p>
+        <p>
+        If it is desired to save the FM conditions acquired, specify a file name to save the data.
+        </p>
+        <p>
+        To check the content of the saved file, use the fsviewfile command.
+        </p>
+        <p>
+        For more information on the fsviewfile command, refer to <a href="BasicIF_en_fscmd.html"> &quot;FS Command&quot; in &quot;FutureSuite Basic User Interface Operation Manual&quot;</a>.
+        </p>
+        </li><li><p>
+        -h
+        </p>
+        <p>
+        By executing the following command from the shell, the instructions on how to use this command are displayed:
+        </p>
+        <p><a name="fstcmauxdutsignal.fucntion.help"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#D8FEF0"><pre><samp>
+
+
+  % fsfmm -h
+  Usage: fsfmm [ --session &lt;session_id&gt; ]
+               [ --station &lt;station_number&gt; ]
+               [ --site &lt;site_number&gt; ]
+               [ --unit &lt;unit_name&gt; ]
+               [ --output-file &lt;file_name&gt; ]
+               [ -h ]
+  %
+
+
+        </samp></pre></td></tr></table></a></p>
+    </li></ul>
+</li></ol>
+<HR>
+<A HREF="StandardUtil_en_fmm.cui.html">[Up]</A>
+<A HREF="StandardUtil_en_fmm.cui.html">[Prev]</A>
+<A HREF="StandardUtil_en_plst.html">[Next]</A>
+<HR>
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+</BODY>
+</HTML>

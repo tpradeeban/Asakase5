@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.2.html">[Up]</A>
+<A HREF="mci_en_ubm1.3.2.4.html">[Prev]</A>
+<A HREF="mci_en_ubm1.3.5.html">[Next]</A>
+<HR>
+<h1><a name="ubm1.3.2.5">Setting range for JumpAddress</a></h1>
+
+<p>
+The usable address ranges in the universal buffer memory are as follows.
+</p>
+<p><a name="ubm1.3.2.5_itbl_1"><table border="1" width="80%">
+<caption>Setting range for JumpAddress.</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Range</td><td valign="middle" bgcolor="#D8FEF0">Description</td></tr>
+<tr><td valign="middle">T5833 (*1)</td><td valign="middle">0x0 to 0x3fff</td><td valign="middle">The DDR mode is UT_ON</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x7fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">T5831 (*1)</td><td valign="middle">0x0 to 0x11fff</td><td valign="middle">The DDR mode is UT_ON</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x23fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">0x0 to 0x1fff</td><td valign="middle">The DDR mode is UT_ON</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x3fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">T5822 (*1)</td><td valign="middle">0x0 to 0x3fff</td><td valign="middle">The DDR mode is UT_ON</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x7fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">0x0 to 0x1fff</td><td valign="middle"></td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">0x0 to 0x1fff</td><td valign="middle"></td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">0x0 to 0x7ff</td><td valign="middle">UT_UBM_INDIVIDUAL for capturing pass and fail data is selected</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x3fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">T5503HS2(*2)</td><td valign="middle">0x0 to 0x7fff</td><td valign="middle"></td></tr>
+<tr><td valign="middle">T5503HS (*2)</td><td valign="middle">0x0 to 0x7fff</td><td valign="middle"></td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">0x0 to 0x3fff</td><td valign="middle"></td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">0x0 to 0x1fff</td><td valign="middle">UT_UBM_INDIVIDUAL for capturing pass and fail data is selected</td></tr>
+<tr><td valign="middle"></td><td valign="middle">0x0 to 0x3fff</td><td valign="middle">Other than above</td></tr>
+<tr><td valign="middle">W5320</td><td valign="middle">0x0 to 0x1fff</td><td valign="middle"></td></tr>
+
+</a></table></p>
+<p>
+(*1) When the interleave mode is (n) WAY, the capacity is 1/n of the preceding amount.
+</p>
+<pre>
+ Example: When the interleave mode is 2WAY, the capacity is 1/2.
+</pre>
+<p>
+(*2) The conditions apply to the specifiable addresses. (The following <b>n</b> indicates the number of WAYs for the interleave mode:)
+</p>
+<ul><li>
+    <p>
+    DDR mode is UT_OFF: Only the addresses of multiples of <b>n</b> can be specified.
+    </p>
+    </li><li><p>
+    DDR mode is UT_ON: Only the addresses of multiples of <b>n</b>*2 can be specified.
+    </p>
+</li></ul>
+<p>
+The meaning of the specified addresses differs according to a tester model.
+</p>
+<ul><li>
+    <p>
+    Type-A: (*2)      : Indicates a UBM address.
+    </p>
+    </li><li><p>
+    Type-B: Other than above: Indicates <a href="mci_en_ubm1.2.html#Cubm1.1.1">UBM AP</a>.
+    </p>
+</li></ul>
+<pre>
+  For this reason, addresses for the Type-A must be specified with a consideration of the interleave mode or double-speed mode.
+
+  The following is an example when the interleave mode is 2WAY and double-speed mode:
+</pre>
+<p><center><a name="Fubm1.2.2.3"><img src="../../image/mci_ubm_1_3_2_5_3_en.gif"></a><br></center><p>
+<pre>
+  When the interleave mode is 4WAY or greater, a step of each Data(m) in the preceding figure increases according to the number of WAYs.
+</pre>
+<p>
+The conditions under which UBM AP is incremented differs according to a tester model.
+</p>
+<ul><li>
+    <p>
+    Type-A: Incremented only in a cycle (C0) which enables UBM.
+    </p>
+    </li><li><p>
+    Type-B: Incremented in all subsequent cycles after the cycle (C0) which enables UBM.
+    </p>
+    <p><a name="cubm1.3.2.5.2"><table border="1" cellpadding="0" width="80%"><caption align=bottom>Type-A</caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+MPAT  SAMMP1
+                  ; UBM AP
+    NOP  : C0     ; #0
+         : C0     ; #1
+         : C0     ; #2
+         : C0     ; #3
+    NOP  : C0     ; #4
+         :        ;    &lt;-- UBM AP is not incremented.
+         : C0     ; #5
+         :        ;    &lt;-- UBM AP is not incremented.
+    NOP  : C0     ; #6
+         :        ;    &lt;-- UBM AP is not incremented.
+         :        ;    &lt;-- UBM AP is not incremented.
+         : C0     ; #7
+    STPS
+END
+    </code></pre></td></tr></table></a></p>
+    <p><a name="cubm1.3.2.5.3"><table border="1" cellpadding="0" width="80%"><caption align=bottom>Type-B</caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+MPAT  SAMMP1
+                  ; UBM AP
+     NOP : C0     ; #0
+         : C0     ; #1
+         : C0     ; #2
+         : C0     ; #3
+     NOP : C0     ; #4
+         :        ; #5   &lt;-- UBM AP is incremented.
+         : C0     ; #6
+         :        ; #7   &lt;-- UBM AP is incremented.
+     NOP : C0     ; #8
+         :        ; #9   &lt;-- UBM AP is incremented.
+         :        ; #10  &lt;-- UBM AP is incremented.
+         : C0     ; #11
+     STPS
+END
+    </code></pre></td></tr></table></a></p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.2.html">[Up]</A>
+<A HREF="mci_en_ubm1.3.2.4.html">[Prev]</A>
+<A HREF="mci_en_ubm1.3.5.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

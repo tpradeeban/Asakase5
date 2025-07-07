@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_InitializeUbmConfigHandle.html">[Prev]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigFunctionSelect.html">[Next]</A>
+<HR>
+<h1><a name="UTL_AddUbmConfigFunctionSelect">UTL_AddUbmConfigFunctionSelect --- Adding the Universal Buffer Memory Function to the UbmConfig Handle</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigFunctionSelect.html">UTL_AddUbmConfigFunctionSelect</a>( UbmConfigHandle h, RadioButton sel, RadioButton EnableCycle);
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h   : UbmConfigHandle
+</p>
+<p>
+sel : Universal buffer memory function Specify either of the following values:
+</p>
+<pre>
+   For more information, refer to <a href="mci_en_ubm1.3.2.1.html">&quot;Setting range for FunctionSelect&quot;</a>.
+</pre>
+<p>
+EnableCycle : Specify the cycle in which the universal buffer memory function is enabled.
+</p>
+<pre>
+   For more information, refer to <a href="mci_en_ubm1.3.2.2.html">&quot;Setting range for Cycle&quot;</a>.
+</pre>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to add the universal buffer memory function to the UbmConfig handle.
+</p>
+<p>
+This MCI also sets the cycle in which the universal buffer memory function is enabled.
+</p>
+<p>
+No universal buffer memory function is added to the UbmConfig handle immediately after the handle is obtained (after <a href="../../../ATFSsys/html/en/mci_en_UTL_GetUbmConfigHandle.html">UTL_GetUbmConfigHandle</a>() is executed) and <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearUbmConfigFunctionSelect.html">UTL_ClearUbmConfigFunctionSelect</a>() is executed.
+</p>
+<p>
+If any universal buffer memory function, which cannot be set to the test system, is specified, a runtime error occurs when <a href="../../../ATFSsys/html/en/mci_en_UTL_SendUbmConfig.html">UTL_SendUbmConfig</a>() is executed.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained.(No change)
+    </p>
+    </li><li><p>
+    The universal buffer memory function has been added to the UbmConfig handle.
+    </p>
+    </li><li><p>
+    The UbmConfigHandle cycle has been set.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_InitializeUbmConfigHandle.html">[Prev]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigFunctionSelect.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite Standard Utility Tool Operation Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+<HR>
+<A HREF="StandardUtil_en_ubmt.func.html">[Up]</A>
+<A HREF="StandardUtil_en_ubmt.func.display.html">[Prev]</A>
+<A HREF="StandardUtil_en_ubmt.func.layout.html">[Next]</A>
+<HR>
+<h1><a name="ubmt.func.edit">Editing UBM Data</a></h1>
+
+<p>
+To edit UBM data, perform the following procedure:
+</p>
+<p>
+( Operation procedure)
+</p>
+<ol><li>
+    <p>
+    Select a cell to edit.
+    </p>
+    <p>
+    To select multiple consecutive cells, all cells between the starting point and ending point are selected by performing the following operations:
+    </p>
+    <ul><li>
+        <p>
+        Left-click a cell which is the starting point of the range.
+        </p>
+        </li><li><p>
+        Left-click another cell, which is the ending point of the range, while pressing the Shift key.
+        </p>
+        <p>
+        When a starting point is not selected, the top-left cell is the default starting point.
+        </p>
+    </li></ul>
+    </li><li><p>
+    With cells selected, edit data from the [Edit] menu of the main window or from the pop-up menu displayed by pressing the right mouse button.
+    </p>
+    <p>
+    To edit data in a single cell, the text box which is displayed by double-clicking on the cell can also be used.
+    </p>
+    <p>
+    The pop-up menu is as follows:
+    </p>
+    <p><center><a name="StandardUtil_UBMT_PopupMenu_000"><img src="../../image/StandardUtil_UBMT_PopupMenu_000.png"></a><br>UBM Tool: Popup Menu</center><p>
+    <ul><li>
+        <p>
+        Multiple Cell Edit
+        </p>
+        <p>
+        Edits the selected cell value.
+        </p>
+        <ul><li>
+            <p>
+            Selecting the [Multiple Cell Edit] menu displays the [Multiple Cell Edit] dialog box.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_EditDialog_000"><img src="../../image/StandardUtil_UBMT_EditDialog_000.png"></a><br>UBM Tool: [Multiple Cell Edit] dialog box</center><p>
+            <p>
+            Enter a hexadecimal number without symbol in the text box.
+            </p>
+            <p>
+            To set the entered value, click the [OK] button. To cancel, click the [Cancel] button.
+            </p>
+        </li></ul>
+        </li><li><p>
+        Clear
+        </p>
+        <p>
+        Sets 0 (zero) for the selected cell value.
+        </p>
+        </li><li><p>
+        Copy
+        </p>
+        <p>
+        Copies the selected cell value.
+        </p>
+        </li><li><p>
+        Paste
+        </p>
+        <p>
+        Pastes the copied data.
+        </p>
+        <p>
+        The paste operation is as follows:
+        </p>
+        <ul><li>
+            <p>
+            When data is copied from a single cell, the data is pasted into the selected pasting range.
+            </p>
+            <p>
+            Select the copy range.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_000"><img src="../../image/StandardUtil_UBMT_CopyPaste_000.png"></a><br>UBM Tool:  Select the copy range.</center><p>
+            <p>
+            Select the pasting range.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_001"><img src="../../image/StandardUtil_UBMT_CopyPaste_001.png"></a><br>UBM Tool: Select the pasting cell.</center><p>
+            <p>
+            Paste the copied data into the selected range.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_002"><img src="../../image/StandardUtil_UBMT_CopyPaste_002.png"></a><br>UBM Tool: Paste the copied data into the selected range.</center><p>
+            </li><li><p>
+            When data is copied from multiple cells, the data in the selected copy range is pasted into the selected pasting cell being used as the left top of the data range.
+            </p>
+            <p>
+            Select the copy range.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_003"><img src="../../image/StandardUtil_UBMT_CopyPaste_003.png"></a><br>UBM Tool: Select the copy range.</center><p>
+            <p>
+            Select the pasting cell.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_004"><img src="../../image/StandardUtil_UBMT_CopyPaste_004.png"></a><br>UBM Tool: Select the pasting cell.</center><p>
+            <p>
+            Paste the data into the selected cell being used as the left top of the data range.
+            </p>
+            <p><center><a name="StandardUtil_UBMT_CopyPaste_005"><img src="../../image/StandardUtil_UBMT_CopyPaste_005.png"></a><br>UBM Tool: Paste the data into the selected cell being used as the left top of the data range.</center><p>
+        </li></ul>
+    </li></ul>
+</li></ol>
+<p>
+Just like cells, DUT numbers, channel numbers, or addresses can be selected and edited.
+</p>
+<ul><li>
+    <p>
+    Selecting a DUT number or channel number causes all cells of the relevant column to be selected.
+    </p>
+    <p>
+    However, DUT numbers, which are split in the number of channels and displayed, cannot be selected.
+    </p>
+    </li><li><p>
+    Selecting an address causes all cells of the relevant row to be selected.
+    </p>
+    </li><li><p>
+    Just like selecting multiple consecutive cells, two or more continuous DUT numbers, channel numbers, or addresses can be selected.
+    </p>
+    <p><center><a name="StandardUtil_UBMT_Multiple_Cell_000"><img src="../../image/StandardUtil_UBMT_Multiple_Cell_000.png"></a><br>UBM Tool: Selecting multiple consecutive cells</center><p>
+</li></ul>
+<p>
+To write edited UBM data in UBM, click the [Write] button in the main window.
+</p>
+<p>
+The write operation for the I/O branch setting is as follows:
+</p>
+<ul><li>
+    <p>
+    When editing only one of I/O branching DUTs, that edited data is written to all the I/O branching DUTs.
+    </p>
+    </li><li><p>
+    When editing two or more of I/O branching DUTs, data of the highest-numbered DUT of the edited DUTs is written to all the I/O branching DUTs.
+    </p>
+    </li><li><p>
+    Data is written, read, and displayed again.
+    </p>
+</li></ul>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+When UBM data is not displayed, the [Write] button is grayed out to disable selection operation.
+</p>
+</strong></td></tr></table></a></p></center>
+<HR>
+<A HREF="StandardUtil_en_ubmt.func.html">[Up]</A>
+<A HREF="StandardUtil_en_ubmt.func.display.html">[Prev]</A>
+<A HREF="StandardUtil_en_ubmt.func.layout.html">[Next]</A>
+<HR>
+<A HREF="StandardUtil_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Standard Utility Tool Operation Manual</DIV>
+</BODY>
+</HTML>

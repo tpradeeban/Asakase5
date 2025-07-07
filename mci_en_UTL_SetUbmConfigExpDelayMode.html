@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigCaptureMode.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigOverlayCycle.html">[Next]</A>
+<HR>
+<h1><a name="UTL_SetUbmConfigExpDelayMode">UTL_SetUbmConfigExpDelayMode --- Setting whether to Delay the Expected Pattern</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigExpDelayMode.html">UTL_SetUbmConfigExpDelayMode</a>( UbmConfigHandle h, CheckButton ExpDelayMode );
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h           :  UbmConfigHandle
+</p>
+<p>
+ExpDelayMode : Specifies whether to delay the expected pattern. Specify one of the following:
+</p>
+<ul><li>
+    <p>
+    UT_OFF  : Does not cause delay.
+    </p>
+    </li><li><p>
+    UT_ON   : Causes delay.
+    </p>
+</li></ul>
+<p><a name="UTL_SetUbmConfigExpDelayMode_tb1"><table border="1" width="80%">
+<caption>Values that can be set for ExpDelayMode</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Value that can be set</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5831</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5503HS2</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">T5503HS</td><td valign="middle">UT_OFF,UT_ON</td></tr>
+<tr><td valign="middle">Other than above</td><td valign="middle">UT_OFF</td></tr>
+
+</a></table></p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to set whether to cause delay for the number of cycles specified by <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinExpDelay.html">UTL_SetPinExpDelay</a>() or <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinModeExpDelay.html">UTL_SetPinModeExpDelay</a>() when capturing pass and fail information.
+</p>
+<p>
+This MCI can be used only when UT_UBM_UNIT_SCRESULTMEMORY is specified for the UBM function.
+</p>
+<p>
+If setting other than UT_ON is specified, UT_OFF is assumed to be specified.
+</p>
+<p>
+The initial value when the handle is obtained is UT_OFF.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If an incorrect handle is specified, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained. (No change)
+    </p>
+    </li><li><p>
+    Whether to delay the expected pattern has been set to the UbmConfig handle.
+    </p>
+    <center><p><a name="UBM1.3.3.41.1"><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+    <p>
+    When the interleave mode is 2WAY or greater, the following restrictions apply:
+    </p>
+    <ul><li>
+        <p>
+        When using the UT_DELAY_CYCLE mode of <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinModeExpDelay.html">UTL_SetPinModeExpDelay</a>(), this function does not operate correctly if a value other than the multiple of the number of interleaves is specified for the number of delay cycles.
+        </p>
+        </li><li><p>
+        The operation is not performed correctly unless all the cycles from which data is stored to UBM are enabled in the pattern program.
+        </p>
+        <p><a name="UBM1.3.3.41.1_spp1"><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+MPAT SAMPLE
+
+    ILMODE 2WAY
+
+    STRAT #000
+
+          NOP : W              XB&lt;0
+              : W
+          NOP : W R  C0 C10    XB&lt;XB+1
+              : W R  C0
+          NOP : W R  C0
+              : W R  C0
+          NOP : W R          &lt;-- There is no description on the first step.
+              : W R  C0
+          NOP : W R  C0
+              : W R  C0
+          NOP : W R  C0
+              : W R          &lt;-- There is no description on the second step.
+          NOP : W R  C0
+              : W R  C0
+
+END
+        </code></pre></td></tr></table></a></p>
+    </li></ul>
+    </strong></td></tr></table></a></p></center>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigCaptureMode.html">[Prev]</A>
+<A HREF="mci_en_UTL_SetUbmConfigOverlayCycle.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

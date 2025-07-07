@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite Hardware Simulation Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="hwsim_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Hardware Simulation Manual</DIV>
+<HR>
+<A HREF="hwsim_en_TOC.html">[Up]</A>
+<A HREF="hwsim_en_T5822.html">[Prev]</A>
+<A HREF="hwsim_en_T5761.html">[Next]</A>
+<HR>
+<h1><a name="T5781">T5782/T5781</a></h1>
+
+<ol><li>
+    <p>
+    TESIM behavior switch function
+    </p>
+    <p>
+    The following function can be switched by TESIM behavior switch function.
+    </p>
+    <p>
+    For more information on the procedure for switching the TESIM behavior, refer to &quot;<a href="../../../ATFStesim/html/en/Tesim_users_en_6.2.html">Details of function</a>&quot; in &quot;<a href="../../../ATFStesim/html/en/Tesim_users_en_6.html">TESIM behavior switch function</a>.&quot;
+    </p>
+    <ul><li>
+        <p>
+        Maximum test rate setting
+        </p>
+        <p>
+        Set the ATFSTESIM_TG_MAXRATE environment variable.
+        </p>
+        <p><a name="table1"><table border="1" width="80%">
+<caption>Available values for environment variable ATFSTESIM_TG_MAXRATE</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Environment variable value</td><td valign="middle" bgcolor="#D8FEF0">Description</td></tr>
+<tr><td valign="middle">266M</td><td valign="middle">Maximum test rate is 266MHz</td></tr>
+<tr><td valign="middle">166M</td><td valign="middle">Maximum test rate is 166MHz</td></tr>
+<tr><td valign="middle">Not specified</td><td valign="middle">Maximum test rate is 166MHz</td></tr>
+
+</a></table></p>
+        </li><li><p>
+        PPS channel number setting
+        </p>
+        <p>
+        Set environment variable 'ATFSTESIM_DPU_MAXPPSCHANNEL'.
+        </p>
+        <p><a name="table2"><table border="1" width="80%">
+<caption>Available values for environment variable ATFSTESIM_DPU_MAXPPSCHANNEL</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Environment variable value</td><td valign="middle" bgcolor="#D8FEF0">Description</td></tr>
+<tr><td valign="middle">4</td><td valign="middle">The channel of PPS is limited to 4 for each Test Site</td></tr>
+<tr><td valign="middle">8</td><td valign="middle">The channel of PPS is limited to 8 for each Test Site</td></tr>
+<tr><td valign="middle">Not specified</td><td valign="middle">The channel of PPS is limited to 4 for each Test Site</td></tr>
+
+</a></table></p>
+    </li></ul>
+    </li><li><p>
+    The function limitation
+    </p>
+    <ul><li>
+        <p>
+        The mode setting to the following memories is allowed but the memory function does not operate.
+        </p>
+        <ul><li>
+            <p>
+            Address fail memory(AFM)
+            </p>
+            </li><li><p>
+            Bad block memory(BBM)
+            </p>
+            </li><li><p>
+            Pattern memory(PM)
+            </p>
+            </li><li><p>
+            Data Buffer Memory(DBM)
+            </p>
+            </li><li><p>
+            Universal Buffer Memory(UBM)
+            </p>
+        </li></ul>
+        </li><li><p>
+        The following data is not captured in the data fail memory (DFM).
+        </p>
+        <ul><li>
+            <p>
+            Fail data
+            </p>
+        </li></ul>
+    </li></ul>
+</li></ol>
+<HR>
+<A HREF="hwsim_en_TOC.html">[Up]</A>
+<A HREF="hwsim_en_T5822.html">[Prev]</A>
+<A HREF="hwsim_en_T5761.html">[Next]</A>
+<HR>
+<A HREF="hwsim_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite Hardware Simulation Manual</DIV>
+</BODY>
+</HTML>

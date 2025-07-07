@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.4.3.html">[Up]</A>
+<A HREF="mci_en_UTL_GetUbmAccessDut.html">[Prev]</A>
+<A HREF="mci_en_UTL_GetUbmAccessStartAddr.html">[Next]</A>
+<HR>
+<h1><a name="UTL_GetUbmAccessPin">UTL_GetUbmAccessPin --- Obtaining the Pinlist that Is Set to the Handle</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+int <a href="../../../ATFSsys/html/en/mci_en_UTL_GetUbmAccessPin.html">UTL_GetUbmAccessPin</a>( UbmAccessHandle h,  char **pinlist_name);
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h               : UbmAccessHandle
+</p>
+<p>
+pinlist_name    : Pointer of the variable in which the pinlist is stored
+</p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<ul><li>
+    <p>
+    1 : Read correctly.
+    </p>
+    </li><li><p>
+    0 : No data exists in the handle.
+    </p>
+    </li><li><p>
+    -1 : Could not be read.(An error occurred.)
+    </p>
+</li></ul>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used obtain the pinlist that is set to the handle.
+</p>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If an incorrect handle is specified, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmAccessHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmAccessHandle has been obtained (No change).
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.4.3.html">[Up]</A>
+<A HREF="mci_en_UTL_GetUbmAccessDut.html">[Prev]</A>
+<A HREF="mci_en_UTL_GetUbmAccessStartAddr.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigStrbMode.html">[Prev]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigStrbChannel.html">[Next]</A>
+<HR>
+<h1><a name="UTL_AddUbmConfigStrbChannel">UTL_AddUbmConfigStrbChannel --- Setting Strobes</a></h1>
+
+<p>
+<b>SYNTAX</b>
+</p>
+<p>
+void <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigStrbChannel.html">UTL_AddUbmConfigStrbChannel</a>( UbmConfigHandle h, RadioButton alpgbank, RadioButton strbch );
+</p>
+<p>
+<b>ARGUMENT(S)</b>
+</p>
+<p>
+h           :  UbmConfigHandle
+</p>
+<p>
+alpgbank    :  Bank number
+</p>
+<p><a name="ubm1.3.3.12_itbl_1"><table border="1" width="80%">
+<caption>Setting range for ALPG BANK No.</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Range</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5831</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">-</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">0 or 1</td></tr>
+<tr><td valign="middle">T5503HS2</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5503HS</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">0</td></tr>
+<tr><td valign="middle">W5320</td><td valign="middle">0</td></tr>
+
+</a></table></p>
+<p>
+strbch      :  Strobe channel
+</p>
+<p><a name="ubm1.3.3.8_itbl_1"><table border="1" width="80%">
+<caption>Setting range for STRB Channel No.</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Range</td></tr>
+<tr><td valign="middle">0 or 1</td></tr>
+
+</a></table></p>
+<p>
+<b>RETURN VALUE</b>
+</p>
+<p>
+None
+</p>
+<p>
+<b>DESCRIPTION</b>
+</p>
+<p>
+This MCI is used to add the strobe channel and bank number which are used when PASS/FAIL data is captured.
+</p>
+<p>
+Please select the STRB channel and the Bank number specified by the following MCI.
+</p>
+<ul><li>
+    <p>
+     <a href="../../../ATFSsys/html/en/mci_en_UTL_AddPinStrbCpeNumber.html">UTL_AddPinStrbCpeNumber</a>()
+    </p>
+    </li><li><p>
+     <a href="../../../ATFSsys/html/en/mci_en_UTL_AddPinWstrbCpeNumber.html">UTL_AddPinWstrbCpeNumber</a>()
+    </p>
+</li></ul>
+<center><p><a name="UBM1.3.3.12.1"><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+The result of the window comparison timing (WSTRB) is stored in the strobe channel 1 side.
+</p>
+</strong></td></tr></table></a></p></center>
+<p>
+<b>ERROR CHECK(S)</b>
+</p>
+<ul><li>
+    <p>
+    If the specified handle is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the specified bank number is incorrect, a runtime error occurs.
+    </p>
+    </li><li><p>
+    If the specified strobe channel is incorrect, a runtime error occurs.
+    </p>
+</li></ul>
+<p>
+<b>REQUIREMENT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle must be obtained.
+    </p>
+</li></ul>
+<p>
+<b>RESULT(S)</b>
+</p>
+<ul><li>
+    <p>
+    UbmConfigHandle has been obtained.(No change)
+    </p>
+    </li><li><p>
+    Strobe channel and bank have been set to the UbmConfig handle.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_ubm1.3.3.html">[Up]</A>
+<A HREF="mci_en_UTL_SetUbmConfigStrbMode.html">[Prev]</A>
+<A HREF="mci_en_UTL_ClearUbmConfigStrbChannel.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>
