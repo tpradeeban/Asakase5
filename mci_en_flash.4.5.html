@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_UTL_ReadFlashMaxFail.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.html">[Next]</A>
+<HR>
+<h1><a name="flash.4.5">Limitations on Flash Memory Parallel Measurement Function</a></h1>
+
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+For the following test systems, the flash memory parallel measurement function cannot be used in the FLG, JMZ, or JFFI instruction cycle in a pattern program.
+</p>
+<ul><li>
+    <p>
+    T5833
+    </p>
+    </li><li><p>
+    T5831
+    </p>
+    </li><li><p>
+    T5822
+    </p>
+</li></ul>
+<p>
+For the following test systems, the flash memory parallel measurement function cannot be used with the universal buffer memory. Specify <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearUbmConfigFunctionSelect.html">UTL_ClearUbmConfigFunctionSelect</a>() before using the flash memory parallel measurement function.
+</p>
+<ul><li>
+    <p>
+    T5761
+    </p>
+    </li><li><p>
+    T5588
+    </p>
+    </li><li><p>
+    T5383
+    </p>
+</li></ul>
+<p>
+For the following test systems, the flash memory parallel measurement function cannot be used with the bad block memory. Specify UT_BBM_DISABLE by using <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigMode.html">UTL_SetBbmConfigMode</a>() before using the flash memory parallel measurement function.
+</p>
+<ul><li>
+    <p>
+    T5761
+    </p>
+    </li><li><p>
+    T5588
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<p>
+The following limitations apply when using the flash memory parallel measurement function:
+</p>
+<ol type="a"><li>
+    <p>
+    RATE limitation
+    </p>
+    <ul><li>
+        <p>
+        If the hold register load cycle is a cycle based on the flag sense instruction, the RATE limitations of the flag sense instruction must be satisfied.
+        </p>
+        </li><li><p>
+        T5781
+        When the IO share count is 2 or more, limitations apply to RATE in the hold register load cycle.
+        </p>
+        <p>
+        RATE&gt;=STRB setting value + 60 ns
+        </p>
+        </li><li><p>
+        T5771
+        Limitations apply to RATE in the following operations:
+        </p>
+        <ul><li>
+            <p>
+            RATE in the hold register load cycle
+            </p>
+            </li><li><p>
+            RATE in the hold register clear cycle
+            </p>
+            </li><li><p>
+            RATE in the flash counter increment cycle
+            </p>
+            </li><li><p>
+            RATE in the flash counter clear cycle
+            </p>
+        </li></ul>
+        <p>
+        RATE&gt;=STRB2 setting value + 400 ns
+        </p>
+    </li></ul>
+    </li><li><p>
+    The number of dummy cycles applied until results for which logical comparison was performed are loaded to the hold register
+    </p>
+    </li><li><p>
+    The number of dummy cycles applied after those results are loaded to the hold register or the hold register is cleared until the forced MATCH is cancelled, the logical comparison is inhibited, that inhibition is cancelled, the driver output is inhibited, or that inhibition is cancelled.
+    </p>
+    </li><li><p>
+    The number of dummy cycles applied after FlashCounter reaches the limit value until the forced MATCH, the inhibition of the logical comparison, or the inhibition of the driver output is enabled
+    </p>
+    </li><li><p>
+    The number of dummy cycles applied after Bbc reaches the limit value until the forced MATCH, the inhibition of the logical comparison, or the inhibition of the driver output is enabled
+    </p>
+    <p><a name="FlashRestrictions"><table border="1" width="80%">
+<caption>Limitations on Flash Parallel Measurement Function</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">a</td><td valign="middle" bgcolor="#D8FEF0">b</td><td valign="middle" bgcolor="#D8FEF0">c</td><td valign="middle" bgcolor="#D8FEF0">d</td><td valign="middle" bgcolor="#D8FEF0">e</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">(*2)</td><td valign="middle">16</td><td valign="middle">55</td><td valign="middle">56</td><td valign="middle">58</td></tr>
+<tr><td valign="middle">T5831</td><td valign="middle">(*3)</td><td valign="middle">32</td><td valign="middle">51</td><td valign="middle">54</td><td valign="middle">74</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">(*2)</td><td valign="middle">32</td><td valign="middle">37</td><td valign="middle">37</td><td valign="middle">65</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">(*2)</td><td valign="middle">16</td><td valign="middle">55</td><td valign="middle">56</td><td valign="middle">58</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">(*3)</td><td valign="middle">17</td><td valign="middle">38</td><td valign="middle">46</td><td valign="middle">64</td></tr>
+<tr><td valign="middle">T5771</td><td valign="middle">(*1)</td><td valign="middle">9</td><td valign="middle">---</td><td valign="middle">---</td><td valign="middle">---</td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">(*3)</td><td valign="middle">7</td><td valign="middle">21</td><td valign="middle">23</td><td valign="middle">32</td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">(*2)</td><td valign="middle">17</td><td valign="middle">---</td><td valign="middle">---</td><td valign="middle">---</td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">(*3)</td><td valign="middle">21</td><td valign="middle">46</td><td valign="middle">48</td><td valign="middle">64</td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">(*3)</td><td valign="middle">19</td><td valign="middle">---</td><td valign="middle">---</td><td valign="middle">---</td></tr>
+
+</a></table></p>
+    <ul><li>
+        <p>
+        &quot;---&quot; indicates that the value is not limited.
+        </p>
+        </li><li><p>
+        (*1) For the RATE limitation, refer to <a href="../../../ATFScomp/html/en/pattern_program_en_2.3.4.html">&quot;Match Flag Sense Instruction (FLGL, FFLGL, FLGLIn, FFLGLIn)&quot;</a> in &quot;FutureSuite Pattern Program Reference Manual (T5771/T5724).&quot;
+        </p>
+        </li><li><p>
+        (*2) For the RATE limitation, refer to <a href="../../../ATFScomp/html/en/T5500pattern_program_en_2.3.7.html">&quot;Match Flag Sense Instruction&quot;</a> in &quot;FutureSuite Pattern Program Reference Manual (T5833/T5830/T5822/T5500 Series).&quot;
+        </p>
+        </li><li><p>
+        (*3) For the RATE limitation, refer to <a href="../../../ATFScomp/html/en/T5300pattern_program_en_2.3.7.html">&quot;Match Flag Sense Instruction&quot;</a> in &quot;FutureSuite Pattern Program Reference Manual (T5831/T5781/T5761/T5300 Series/W5320).&quot;
+        </p>
+    </li></ul>
+</li></ol>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_UTL_ReadFlashMaxFail.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

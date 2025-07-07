@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigPinList.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigPageSize.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigStatusBytes">Example of using UTL_SetFailFilterConfigStatusBytes()</a></h1>
+
+<p>
+If the page size is 17664 and the number of status bytes is 2, the UBM transfer size is 17664 + 2 = 17666.
+</p>
+<p><center><a name="mci_ch12_FailFilter_FIG_StatusBytes_1"><img src="../../image/mci_ch12_FailFilter_FIG_StatusBytes_1.png"></a><br>Example 1</center><p>
+<p>
+For multi-plane operation, each plane transfers the same amount of information.
+All the status byte information is located in the first plane.
+The same locations in the subsequent planes contain dummy data, and this data is not used.
+</p>
+<p><center><a name="mci_ch12_FailFilter_FIG_StatusBytes_2"><img src="../../image/mci_ch12_FailFilter_FIG_StatusBytes_2.png"></a><br>Example 2</center><p>
+<p>
+Below is a sample code for setting up the EBM.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    EbmConfigHandle ebmCH;
+    ebmCH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetEbmConfigHandle.html">UTL_GetEbmConfigHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmConfigTransferAreaSize.html">UTL_SetEbmConfigTransferAreaSize</a> (ebmCH, (COLUMN_COUNT + STATUS_BYTES) * PLANE_COUNT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmConfigTransferAreaCount.html">UTL_SetEbmConfigTransferAreaCount</a>(ebmCH, PAGE_COUNT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmConfigBitSize.html">UTL_SetEbmConfigBitSize</a>          (ebmCH, BIT_SIZE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmConfigDdrMode.html">UTL_SetEbmConfigDdrMode</a>          (ebmCH, UT_OFF);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmConfigTransferSignal.html">UTL_SetEbmConfigTransferSignal</a>   (ebmCH, UT_SIG_C(20));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SendEbmConfig.html">UTL_SendEbmConfig</a>                (ebmCH);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(ebmCH);
+</code></pre></td></tr></table></a></p>
+<p>
+Below is a sample code for setting up the UBM.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    UbmConfigHandle ubmCH;
+    ubmCH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetUbmConfigHandle.html">UTL_GetUbmConfigHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigFunctionSelect.html">UTL_AddUbmConfigFunctionSelect</a> (ubmCH, UT_UBM_UNIT_SCRESULTMEMORY, UT_SIG_C(30));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigCaptureMode.html">UTL_SetUbmConfigCaptureMode</a>    (ubmCH, UT_UBM_FIFO);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigTransferCycle.html">UTL_SetUbmConfigTransferCycle</a>  (ubmCH, UT_SIG_C(22));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigTransferSize.html">UTL_SetUbmConfigTransferSize</a>   (ubmCH, (COLUMN_COUNT + STATUS_BYTES) * PLANE_COUNT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigPin.html">UTL_SetUbmConfigPin</a>            (ubmCH, UT_UBM_UNIT_SCRESULTMEMORY, &quot;TARGET_DQs&quot;);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigJumpAddr.html">UTL_SetUbmConfigJumpAddr</a>       (ubmCH, UT_UBM_UNIT_SCRESULTMEMORY, 0, 0x0);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigJumpCycle.html">UTL_SetUbmConfigJumpCycle</a>      (ubmCH, UT_UBM_UNIT_SCRESULTMEMORY, 0, UT_SIG_C(31));
+
+    if (modeDdr==DATA_MODE) {
+        /* SDR */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigDdrMode.html">UTL_SetUbmConfigDdrMode</a>    (ubmCH, UT_OFF);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigStrbMode.html">UTL_SetUbmConfigStrbMode</a>   (ubmCH, UT_UBM_ORFAIL);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigStrbChannel.html">UTL_AddUbmConfigStrbChannel</a>(ubmCH, 0, 0);
+    } else {
+        /* DDR */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigDdrMode.html">UTL_SetUbmConfigDdrMode</a>    (ubmCH, UT_ON );
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetUbmConfigStrbMode.html">UTL_SetUbmConfigStrbMode</a>   (ubmCH, UT_UBM_INDIVIDUAL);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigStrbChannel.html">UTL_AddUbmConfigStrbChannel</a>(ubmCH, 0, 0);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_AddUbmConfigStrbChannel.html">UTL_AddUbmConfigStrbChannel</a>(ubmCH, 0, 1);
+    }
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SendUbmConfig.html">UTL_SendUbmConfig</a>(ubmCH);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(ubmCH);
+</code></pre></td></tr></table></a></p>
+<p>
+Below is a sample code for setting up the fail filter.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    FailFilterConfigHandle ffCH;
+    ffCH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailFilterConfigHandle.html">UTL_GetFailFilterConfigHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAction.html">UTL_SetFailFilterConfigAction</a>     (ffCH, UT_FF_UBM);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a> (ffCH, BIT_SIZE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>    (ffCH, BIT_SIZE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>    (ffCH, 0, &quot;TARGET_DQs&quot;, UT_ON, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigNibbleMode.html">UTL_SetFailFilterConfigNibbleMode</a> (ffCH, UT_FF_NIBBLE_DISABLE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBlockSize.html">UTL_SetFailFilterConfigBlockSize</a>  (ffCH, PAGE_COUNT);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigStatusBytes.html">UTL_SetFailFilterConfigStatusBytes</a>(ffCH, STATUS_BYTES);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPageSize.html">UTL_SetFailFilterConfigPageSize</a>   (ffCH, COLUMN_COUNT);
+</code></pre></td></tr></table></a></p>
+<p>
+The status byte information is captured into the Fail DB, and it can be read out with <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListStatusBytes.html">UTL_ReadFailListStatusBytes</a>().
+</p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigPinList.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigPageSize.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

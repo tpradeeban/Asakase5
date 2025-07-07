@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.html">[Up]</A>
+<A HREF="mci_en_ffc.html">[Prev]</A>
+<A HREF="mci_en_ffc.details.html">[Next]</A>
+<HR>
+<h1><a name="ffc.objective">Objective</a></h1>
+
+<p>
+The purpose of the fail filter are as follows:
+</p>
+<ul><li>
+    <p>
+    Rapidly count bad bits and to save the total count.
+    </p>
+    </li><li><p>
+    Filter out bad bits that are not needed for repair purposes.
+    </p>
+    </li><li><p>
+    Pass along failure information to the Fail DB.
+    </p>
+    <ul><li>
+        <p>
+        This information can be used for failure analysis.
+        </p>
+        </li><li><p>
+        Optional overlay operations can be performed on the failure results.
+        </p>
+    </li></ul>
+</li></ul>
+<p><center><a name="mci_ch12_FailFilter_FIG_BlockDiagram"><img src="../../image/mci_ch12_FailFilter_FIG_BlockDiagram.png"></a><br>Fail Filter Block Diagram</center><p>
+<p>
+There is one fail filter for each ALPG.
+</p>
+<ul><li>
+    <p>
+    It can process 32 bits in parallel received from four 8 bit DUTs or two 16 bit DUTs.
+    </p>
+    </li><li><p>
+    It is possible save non-DQ bit information in addition to DQ bit information.
+    </p>
+    </li><li><p>
+    When IO sharing is used, the pattern will read a page from the first DUT, and then a page from the second DUT, alternating like this for each page.
+    Individual results for each DUT will be processed and saved into the Fail DB.
+    Overlay mode is not available when using IO share mode.
+    </p>
+</li></ul>
+<p>
+There are two operating modes:
+</p>
+<ul><li>
+    <p>
+    UBM mode:
+    Failures are recorded into the UBM and then the data is transferred directly into the fail filter for processing.
+    Failures can be captured at up to 300 MHz SDR 1-WAY or up to 1200 MHz DDR 2-WAY.
+    </p>
+    </li><li><p>
+    Bypass mode:
+    The UBM is not used, and failures go directly to the fail filter.
+    There is a speed penalty in this mode.
+    The maximum transfer speed is limited to 150 MHz (300 Mbps DDR mode).
+    </p>
+</li></ul>
+<p>
+NAND devices typically employ ECC correction to correct some number of bad bits per ECC sector (Region).
+The fail filter allows thresholds to be set which will then operate upon each ECC sector on-the-fly.
+These thresholds are:
+</p>
+<ul><li>
+    <p>
+    Low Threshold (LT)
+    </p>
+    </li><li><p>
+    High Threshold (HT)
+    </p>
+    </li><li><p>
+    Repair Region Threshold (RR)
+    </p>
+    </li><li><p>
+    Total Fail Count Threshold
+    </p>
+</li></ul>
+<p><center><a name="mci_ch12_FailFilter_FIG_Threshold"><img src="../../image/mci_ch12_FailFilter_FIG_Threshold.png"></a><br>Example</center><p>
+<p>
+In the above example, there are 8 pages in a block, with 4 ECC sectors (regions) for each page.
+All the main(core) regions are on the left, and the spare regions are on the right.
+Some failures are shown to show the effect of the thresholds.
+</p>
+<p>
+Low Threshold (LT) is used to indicate how many failures can be repaired with ECC correction within one ECC sector.
+</p>
+<ul><li>
+    <p>
+    (a) If the total number of failures within an ECC sector is smaller than LT, it is considered correctable and those failures are ignored.
+    </p>
+    </li><li><p>
+    (b) Otherwise, the failures within that ECC sector are stored.
+    </p>
+</li></ul>
+<p>
+High Threshold (HT) is used to make a good/bad judgment on the ECC sector.
+</p>
+<ul><li>
+    <p>
+    (c) If the total number of failures within an ECC sector is smaller than HT, it is considered good.
+    </p>
+    </li><li><p>
+    (d) Otherwise, the ECC sector (block) is considered bad and this bad block information is saved into the Fail DB.
+    </p>
+</li></ul>
+<p>
+For example, LT = 4 and HT = 5.
+</p>
+<ul><li>
+    <p>
+    ECC sector 1 on page 4:
+    There are 4 failures.
+    It is equal to LT (b), so all 4 failures are stored.
+    It is smaller than HT (c), so the ECC sector is considered good.
+    </p>
+    </li><li><p>
+    ECC sector 3 on page 5:
+    There are 5 failures.
+    It is greater than LT (b), so all 5 failures are stored.
+    It is equal to HT (d), so the ECC sector (block) is considered bad.
+    </p>
+</li></ul>
+<p>
+Repair Region Threshold (RR) is used when ECC sectors are combined into larger regions.
+This approach is useful when there are repair situations to consider.
+It operates similar to the High Threshold.
+</p>
+<p>
+Total Fail Count Threshold is used to make a pass/fail judgment on the block based upon the total number of failures.
+</p>
+<p>
+There are 128 LT counters, 128 HT counters, and 64 RR for each DUT.
+If a 4 plane device is being tested and a page was subdivided into 16 ECC sectors, then the total number of counters assigned would be 4 x 16 = 64 LT and 64 HT counters.
+The RR total will depend upon the number of ECC sectors that are assigned for each RR Region.
+When the page is completed, the individual counts are then routed to the Fail DB where they can be later retrieved.
+</p>
+<p>
+Failure information can also be routed to the Fail DB.
+At the output end of the fail filter are 4 FIFOs that collect the failures from each DUT.
+From these FIFOs, the failures are automatically sent to the Fail DB.
+</p>
+<p>
+Therefore, information stored in the Fail DB are as follows:
+</p>
+<ul><li>
+    <p>
+    ECC counter values
+    (The actual count of the number of failures per ECC sector)
+    </p>
+    </li><li><p>
+    RR counter values
+    (The actual count of the number of failures based on the repair region)
+    </p>
+    </li><li><p>
+    Total fail count
+    (The actual count of the number of failures per page)
+    </p>
+    </li><li><p>
+    Bad block information
+    </p>
+    </li><li><p>
+    Failure information for a maximum of approximately 32M failing addresses
+    (page, column, the fail data)
+    </p>
+    </li><li><p>
+    Flash counter values
+    (to measure tR, tPROG, or tBERASE time for each DUT)
+    </p>
+    </li><li><p>
+    Status bytes
+    (Information supplied by the DUT)
+    </p>
+</li></ul>
+<p>
+FailList is a group of data that is found within the Fail DB, and is identified by a test name.
+There can be multiple FailLists.
+</p>
+<p>
+<a href="mci_en_ffc.details.html">Setting the Operating Conditions for Fail Filter</a> are MCIs used to set the operating conditions for the fail filter before a pattern is run.
+The amount of data stored into the Fail DB is dependent upon these operating conditions.
+A pattern will need to make use of appropriate MUT signals to cause results to be transferred into the fail filter and to possibly operate in overlay mode.
+<a href="../../../ATFSsys/html/en/mci_en_UTL_Test.html">UTL_Test</a>() is used to set a test name.
+This test name becomes the name of a FailList in the Fail DB where the results are saved.
+When different operating conditions are needed, a different test name must be used which results in a new FailList.
+</p>
+<p>
+<a href="mci_en_fla.details.html">Accessing the Information Stored in the Fail DB</a> are MCIs used to retrieve data from the Fail DB.
+</p>
+<HR>
+<A HREF="mci_en_ffc.html">[Up]</A>
+<A HREF="mci_en_ffc.html">[Prev]</A>
+<A HREF="mci_en_ffc.details.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

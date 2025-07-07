@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_mpsjt.objective.html">[Up]</A>
+<A HREF="mci_en_mpsjt.objective.html">[Prev]</A>
+<A HREF="mci_en_mpsjt.details.html">[Next]</A>
+<HR>
+<h1><a name="mpsjt.objective.bbm">BBM Test Using Multi-plane Status Judgment Table</a></h1>
+
+<p>
+The multi-plane status read function stores bad block information in BBM based on status information (8 bits) output from devices.
+</p>
+<p>
+The following BBM address bits are the plane addresses according to the number of planes:
+</p>
+<p><a name="table-mpsr-purpose"><table border="1" width="80%">
+<caption>Number of Planes and BBM Address Bits</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Number of planes</td><td valign="middle" bgcolor="#D8FEF0">BBM address bits</td></tr>
+<tr><td valign="middle">1</td><td valign="middle">Without bit (Plane 0)</td></tr>
+<tr><td valign="middle">2</td><td valign="middle">Lower one bit (Plane 0 to Plane 1)</td></tr>
+<tr><td valign="middle">4</td><td valign="middle">Lower two bits (Plane 0 to Plane 3)</td></tr>
+<tr><td valign="middle">8</td><td valign="middle">Lower three bits (Plane 0 to Plane 7)</td></tr>
+
+</a></table></p>
+<p>
+The multi-plane status judgment table is a lookup table that is used to judge bad block information for each plane based on status information output from devices.
+Judgment data of each plane is stored in BBM by writing it to the table beforehand.
+</p>
+<p>
+The following is an example of a device with two planes:
+</p>
+<p><center><a name="FIGBBM.MPSR"><img src="../../image/bbm_mpsr_Summary.gif"></a><br>Image of BBM Test Using Multi-plane Status Judgment Table</center><p>
+<ol><li>
+    <p>
+     Specify pin numbers of DUTs from which status information is output.
+    </p>
+    </li><li><p>
+     Specify a setting to capture the judgment result based on status information in BBM.
+    </p>
+    </li><li><p>
+     Specify an MUT signal, which is the same as the status read signal used for the BBM status read cycle, to the pattern program.
+    </p>
+    </li><li><p>
+     Provide the judgment data based on status information in the multi-plane status judgment table.
+    </p>
+    </li><li><p>
+     Status information is used for the addresses in the multi-plane status judgment table.
+    </p>
+    </li><li><p>
+     According to status information, the judgment data items for the number of planes in the relevant addresses of the multi-plane status judgment table are stored in BBM.
+    </p>
+</li></ol>
+<p>
+Setting example of relevant MCIs
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+   // 1.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailSelPinTarget.html">UTL_SetFailSelPinTarget</a>( fspH, UT_FAILSELPIN_TARGET_STATUS_FAIL );   // Defines status information.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 0, 1 );                               // DQ0 (P1)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 1, 2 );                               // DQ1 (P2)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 2, 3 );                               // DQ2 (P3)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 3, 4 );                               // DQ3 (P4)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 4, 5 );                               // DQ4 (P5)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 5, 6 );                               // DQ5 (P6)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 6, 7 );                               // DQ6 (P7)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailSelPinAssign.html">UTL_AddFailSelPinAssign</a>( fspH, 7, 8 );                               // DQ7 (P8)
+       :
+
+   // 2. 6.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_AddBbmConfigCaptureDataByTargetBank.html">UTL_AddBbmConfigCaptureDataByTargetBank</a> ( bbmH, 0, 1, 0, UT_BBM_STATUSFAIL );    // Specifies a setting to capture the judgment result based on status information in BBM.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigStatusSignal.html">UTL_SetBbmConfigStatusSignal</a>            ( bbmH, UT_SIG_C(5) );                   // Status read signal used for the status read cycle.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigPlaneCount.html">UTL_SetBbmConfigPlaneCount</a>              ( bbmH, 2 );                             // Number of planes: 2
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 0,  UT_SIG_X(0) );               // Address signal assigned to BBM  &lt;-- (*1)
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 1,  UT_SIG_X(1) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 2,  UT_SIG_X(2) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 3,  UT_SIG_X(3) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 4,  UT_SIG_X(4) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 5,  UT_SIG_X(5) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 6,  UT_SIG_X(6) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 7,  UT_SIG_X(7) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 8,  UT_SIG_X(8) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 9,  UT_SIG_X(9) );               // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 10, UT_SIG_X(10) );              // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 11, UT_SIG_X(11) );              // Address signal assigned to BBM
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_SetBbmConfigAddrAssign.html">UTL_SetBbmConfigAddrAssign</a>              ( bbmH, 12, UT_SIG_X(12) );              // Address signal assigned to BBM
+       :
+            (*1) Because the number of planes is 2, the lower one bit of the address assigned to BBM is the plane address.
+
+   // 4.
+   <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteMultiPlaneStatusJudgeTable.html">UTL_WriteMultiPlaneStatusJudgeTable</a> ( USlider *tbl, USlider size );   // Writes the judgment data to the multi-plane status judgment table.
+       :
+
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_mpsjt.objective.html">[Up]</A>
+<A HREF="mci_en_mpsjt.objective.html">[Prev]</A>
+<A HREF="mci_en_mpsjt.details.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

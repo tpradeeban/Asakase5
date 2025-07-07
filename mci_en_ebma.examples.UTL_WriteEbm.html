@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ebma.examples.html">[Up]</A>
+<A HREF="mci_en_ebma.examples.html">[Prev]</A>
+<A HREF="mci_en_DFM.html">[Next]</A>
+<HR>
+<h1><a name="ebma.examples.UTL_WriteEbm">Example of using UTL_WriteEbm()</a></h1>
+
+<p>
+This is an example of loading the EBM up with 8 bit data where the data starts at 0x0, increment to 0xF, and then repeat this process.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    unsigned int dataInput[ ] = {
+       0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf};
+
+    unsigned int ebmData[4];
+    unsigned int ebmDataCount = 4;
+
+    ebmData[0] = 0x3 &lt;&lt; 24 | 0x2 &lt;&lt; 16 | 0x1 &lt;&lt; 8 | 0x0;  /* -&gt; 0x03020100 */
+    ebmData[0] = 0x7 &lt;&lt; 24 | 0x6 &lt;&lt; 16 | 0x5 &lt;&lt; 8 | 0x4;  /* -&gt; 0x07060504 */
+    ebmData[0] = 0xb &lt;&lt; 24 | 0xa &lt;&lt; 16 | 0x9 &lt;&lt; 8 | 0x8;  /* -&gt; 0x0b0a0100 */
+    ebmData[0] = 0xf &lt;&lt; 24 | 0xe &lt;&lt; 16 | 0xd &lt;&lt; 8 | 0xc;  /* -&gt; 0x0f0e0d0c */
+
+    EbmAccessHandle ebmAH;
+
+    ebmAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetEbmAccessHandle.html">UTL_GetEbmAccessHandle</a>();
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetEbmAccessStartIndex.html">UTL_SetEbmAccessStartIndex</a>(ebmAH, 0);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteEbm.html">UTL_WriteEbm</a>    (ebmAH, ebmData, sizeof(unsigned int) * ebmDataCount);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(ebmAH);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ebma.examples.html">[Up]</A>
+<A HREF="mci_en_ebma.examples.html">[Prev]</A>
+<A HREF="mci_en_DFM.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigStatusBytes.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigECCSectors.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigPageSize">Example of using UTL_SetFailFilterConfigPageSize()</a></h1>
+
+<p>
+Below is a simple pattern program using UBM mode.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    START   #400
+            NOP         TS1 XB&lt;XH YB&lt;YH         TP&lt;TPH
+            NOP         TS1 X&lt;XB  Y&lt;YB  C20     ; Start iBM-&gt;BM transfer
+            JBF .       TS1                     ; Wait with &quot;JBF .&quot; until transfer completes
+
+    LB0:    NOP         TS1
+
+            NOP         TS1 TRAH&lt;TRASELD        ; Obtain address
+            NOP         TS1 TRA&lt;TRAH
+
+            NOP         TS1 X&lt;XB Y&lt;YB   C31     ; Jump to the start address of UBM capture
+            JNI1 .      TS1 R BMINC DS  C30     ; Capture fail information of 1 page into UBM
+
+            NOP         TS1     C22     C20     ; Start UBM transfer and load new page of BM
+
+            STI5 38     TS1                     ; 32 dummy cycles plus additional 40 nS
+            JNI5 .      TS1                     ; Dummy looping done
+
+            JBF .       TS1                     ; Wait with &quot;JBF .&quot; until transfer completes
+
+            JNC2 FIN                            ; Jump to FIN if it is the last page
+            JNI2 LB0    TS1 XB&lt;XB+1 YB&lt;YH       ; Next page
+            JNC1 FIN                            ; Jump to FIN if it is the last block
+            JNI3 LB0                            ; Next block
+
+    FIN:    STPS                                ; Stop ALPG
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigStatusBytes.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigECCSectors.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

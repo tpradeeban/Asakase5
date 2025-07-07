@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_flash.1.html">[Prev]</A>
+<A HREF="mci_en_flash.4.1.html">[Next]</A>
+<HR>
+<h1><a name="flash.2">Hardware Descriptions for Flash Memory Test Function</a></h1>
+
+<p>
+The flash memory test function consists of the hold register, flash counter, limit register, and fail stack register.
+</p>
+<p>
+The block diagram for the T5771 Flash Memory Test Function is illustrated in the following:
+</p>
+<p><center><a name="FIG08.2"><img src="../../image/mci_ch8_02.gif"></a><br>Block Diagram for the Flash Memory Test Function (T5771, Single Test)</center><p>
+<p><center><a name="FIG08.3"><img src="../../image/mci_ch8_03.gif"></a><br>Block Diagram for the Flash Memory Test Function (T5771, 2 DUTs in Parallel Test)</center><p>
+<p><center><a name="FIG08.4"><img src="../../image/mci_ch8_04.gif"></a><br>Block Diagram for the Flash Memory Test Function (T5771, 4 DUTs in Parallel Test)</center><p>
+<p>
+An explanation of individual blocks for the T5771 Flash Memory Test Function
+</p>
+<ul><li>
+    <p>
+    Fail stack register
+    </p>
+    <p>
+    Stores the accumulated result (PASS or FAIL) of FAIL occurring in the comparison cycle for each pin.
+    </p>
+    <p>
+    The initial value for each pin is PASS.
+    </p>
+    <p>
+    The value for this register can be read with <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFctPin.html">UTL_ReadFctPin</a>().
+    </p>
+    </li><li><p>
+    Hold register
+    </p>
+    <p>
+    This register stores the results of each pin in the fail stack register or match detection.
+    The one that is stored depends on the hold mode setting.
+    </p>
+    <p>
+    The signal set as the load condition for <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashHoldConditionAllDut.html">UTL_SetFlashHoldConditionAllDut</a>()
+    is stored in the hold register for each pin in the specified cycle.
+    </p>
+    <p>
+    If all pins of each DUT are set to the PASS or MATCH condition, logical comparison and driver output of the DUTs in the PASS or MATCH condition are disabled as of the next cycle.
+    </p>
+    <p>
+    If the hold register is cleared, the disabled logical comparison and driver output are enabled again.
+    </p>
+    <p>
+    Hold Register Clear is conducted with cycles output by the pattern generator where signals are set as <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashHoldConditionAllDut.html">UTL_SetFlashHoldConditionAllDut</a>()
+    clear conditions.
+    </p>
+    <p>
+    The initial value for each pin is FAIL or UNMATCH.
+    </p>
+    <p>
+    The value for this register can be read with <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFlashHold.html">UTL_ReadFlashHold</a>().
+    </p>
+    </li><li><p>
+    Flash counter
+    </p>
+    <p>
+    This counter counts the number of write/erase operations for each DUT.
+    </p>
+    <p>
+    When Hold Register values are TOTAL FAIL or UNMATCH for each DUT, signals set as <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashCounterConditionAllDut.html">UTL_SetFlashCounterConditionAllDut</a>()
+    increment conditions output by the pattern generator are incremented by the Flash Counter.
+    </p>
+    <p>
+    If the flash counter matches the limit register, logical comparison and driver output of the matched DUTs are disabled as of the next cycle.
+    </p>
+    <p>
+    If the flash counter is cleared, disabled logical comparison and driver output are enabled again.
+    </p>
+    <p>
+    The flash counter is cleared in the cycle where the signal set as the clear condition for <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashCounterConditionAllDut.html">UTL_SetFlashCounterConditionAllDut</a>() is specified.
+    </p>
+    <p>
+    The initial value for the flash counter is 0.
+    </p>
+    <p>
+    The value for this register can be read with <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFlashCounter.html">UTL_ReadFlashCounter</a>().
+    </p>
+    </li><li><p>
+    Limit register
+    </p>
+    <p>
+    The limit value for the number of write/erase operations for each DUT is set in this register.
+    </p>
+    <p>
+    If the value for the flash counter reaches the value for the limit counter, FAIL occurs and the pattern generator stops. This FAIL is referred to as MAXFAIL.
+    </p>
+    <p>
+    With <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashLimitAllDut.html">UTL_SetFlashLimitAllDut</a>() or
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashLimitByDut.html">UTL_SetFlashLimitByDut</a>(),
+    the value set in this register can be set to the Flash handle.
+    </p>
+    </li><li><p>
+    Disabling logical comparison
+    </p>
+    <p>
+    The results of logical comparison for all pins are forcibly set to PASS or MATCH.
+    </p>
+    <p>
+    Logical comparison and driver output can be disabled for the following DUTs.
+    </p>
+    <ul><li>
+        <p>
+        DUTs in which all pins are matched
+        </p>
+        </li><li><p>
+        DUTs where the flash counter matches the limit register
+        </p>
+        </li><li><p>
+        DUTs with mask specification
+        </p>
+    </li></ul>
+    <p>
+    The disabled condition of logical comparison is retained until the pattern program is completed, unless it is canceled.
+    </p>
+    <p>
+    For DUTs where logical comparison has been disabled once, clear the hold register and flash counter to enable logical comparison again.
+    </p>
+    <p>
+    If <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>() is used, settings for logical comparison of individual I/O pins can be disabled. For details, refer to &quot;FutureSuite MCI Reference Manual 1 - Pin Conditions Interface <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>&quot;.
+    </p>
+    </li><li><p>
+    Disabling driver output
+    </p>
+    <p>
+    For each DUT, the output pattern of the pins with <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInh.html">UTL_SetPinPatternInh</a>() specification is forcibly set to 0.
+    </p>
+    <p>
+    By specifying <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInh.html">UTL_SetPinPatternInh</a>()
+    as a pin to be connected to Write Enable (/WE) and Chip Enable (/CE) of the DUT,
+    excessive write or excessive erase for the DUT can be prevented.
+    </p>
+    <p>
+    Driver output is disabled for the pins with <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInh.html">UTL_SetPinPatternInh</a>()
+    specification of the following DUTs.
+    </p>
+    <ul><li>
+        <p>
+        DUTs in which all pins are matched
+        </p>
+        </li><li><p>
+        DUTs where the flash counter matches the limit register
+        </p>
+        </li><li><p>
+        DUTs with mask specification
+        </p>
+    </li></ul>
+    <p>
+    The disabled condition of driver output is retained until the pattern program is completed, unless it is canceled.
+    </p>
+    <p>
+    For the DUTs with which driver output has been disabled once, clear the hold register and flash counter to enable driver output again.
+    </p>
+    <p>
+    if <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>()
+    is used, settings for driver output of individual I/O pins can be disabled. For details, refer to
+    &quot;FutureSuite MCI Reference Manual 1 - Pin Conditions Interface
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>&quot;.
+    </p>
+</li></ul>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_flash.1.html">[Prev]</A>
+<A HREF="mci_en_flash.4.1.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

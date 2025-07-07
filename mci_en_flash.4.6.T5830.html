@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5831.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5822.html">[Next]</A>
+<HR>
+<h1><a name="flash.4.6.T5830">T5830</a></h1>
+
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+To use the BBM function together with the flash memory parallel measurement function, the reference function block assigned to each DUT must be the same for the flash memory parallel measurement function and the BBM function.
+If a DUT with different reference function block is included, a runtime error occurs.
+</p>
+<p>
+When switching the reference function block after using the BBM function, temporarily specify the following for the function being used.
+</p>
+<ul><li>
+    <p>
+    Flash memory parallel measurement function
+    </p>
+    <ul><li>
+        <p>
+        MCI : Specify UT_FLASH_DISABLE for <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFlashModeAllDut.html">UTL_SetFlashModeAllDut</a>(), and then execute <a href="../../../ATFSsys/html/en/mci_en_UTL_SendFlash.html">UTL_SendFlash</a>().
+        </p>
+        </li><li><p>
+        ATL : Execute the SELECT FLASH DISABLE statement.
+        </p>
+    </li></ul>
+    </li><li><p>
+    BBM function
+    </p>
+    <ul><li>
+        <p>
+        Specify all of the following conditions, and then execute <a href="../../../ATFSsys/html/en/mci_en_UTL_SendFailSelPin.html">UTL_SendFailSelPin</a>().
+        </p>
+        <ul><li>
+            <p>
+            Specify the fail capture target for <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailSelPinTarget.html">UTL_SetFailSelPinTarget</a>().
+            </p>
+            </li><li><p>
+            Specify UT_OFF for <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailSelPin.html">UTL_SetFailSelPin</a>() for all tester pins.
+            </p>
+        </li></ul>
+    </li></ul>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<p>
+CHTYPE42 and CHTYPE47 differ in the method for specifying tester channels in the socket program. However, the conditions where the flash memory parallel measurement function can be used are the same.
+</p>
+<p>
+Tester channels assigned to each DUT must be specified from one of the function blocks.
+</p>
+<p>
+The function block to which each DUT is assigned is defined as the reference function block.
+</p>
+<p><a name="func_block_group5830"><table border="1" width="80%">
+<caption></caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Function block</td><td valign="middle" bgcolor="#D8FEF0">Tester channels of CHTYPE42</td><td valign="middle" bgcolor="#D8FEF0">Tester channels of CHTYPE47</td></tr>
+<tr><td valign="middle">1</td><td valign="middle">1-24A, 33-56A</td><td valign="middle">1-24,    33-56</td></tr>
+<tr><td valign="middle">2</td><td valign="middle">1-24B, 33-56B</td><td valign="middle">65-88,   97-120</td></tr>
+<tr><td valign="middle">3</td><td valign="middle">1-24C, 33-56C</td><td valign="middle">129-152, 161-184</td></tr>
+
+</a></table></p>
+<p><center><a name=""><img src="../../image/flash_T5830socket_sample01.gif"></a><br></center><p>
+<ul><li>
+    <p>
+    Socket program for CHTYPE42
+    </p>
+    <ul><li>
+        <p>
+        Tester channels for each DUT are specified in child units, so they are specified from a single function block (not multiple function blocks).
+        </p>
+        <p>
+        The function block to which each DUT is assigned is the reference function block.
+        </p>
+    </li></ul>
+    </li><li><p>
+    Socket program for CHTYPE47
+    </p>
+    <ul><li>
+        <p>
+        If tester channels are specified from a single function block (not multiple function blocks) for all DUTs, the function block to which each DUT is assigned is the reference function block.
+        </p>
+        </li><li><p>
+        If tester channels are specified from multiple function blocks for some of DUTs, the reference function block is determined by the following conditions.
+        </p>
+        <p>
+        Conditions (a) to (c) have precedence in this order.
+        </p>
+        <ul><li>
+            <p>
+            Condition (a): The function block containing the tester channels belonging to the tester pin to which the MATCH connection condition is specified is determined as the reference function block.
+            </p>
+            <center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+            <p>
+            When the MATCH connection condition is specified for multiple tester pins, the tester pins must be in a single function block.
+            </p>
+            </strong></td></tr></table></a></p></center>
+            </li><li><p>
+            Condition (b): The function block containing the tester channels belonging to the tester pin specified with <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailSelPin.html">UTL_SetFailSelPin</a>() is determined as the reference function block.
+            </p>
+            <center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+            <p>
+            In the flash memory parallel measurement function, the settings with <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailSelPin.html">UTL_SetFailSelPin</a>() are only used in order to determine the reference function block.
+            </p>
+            </strong></td></tr></table></a></p></center>
+            </li><li><p>
+            Condition (c): The function block containing the tester channels belonging to the lowest-numbered tester pin specified with P or PC is determined as the reference function block.
+            </p>
+        </li></ul>
+    </li></ul>
+</li></ul>
+<p>
+When using the flash memory parallel measurement function, the following conditions are applied to each CHTYPE setting in the socket program:
+</p>
+<ul><li>
+    <p>
+    Conditions common to CHTYPE42 and CHTYPE47
+    </p>
+    <ul><li>
+        <p>
+        Pin conditions must be specified in advance when using the flash memory parallel measurement function.
+        </p>
+        </li><li><p>
+        The number of parallel measurement DUTs must be up to 12 for all function blocks.
+        </p>
+        </li><li><p>
+        There is not a DUT branching to tester pins that use the flash memory parallel measurement function.
+        </p>
+    </li></ul>
+    <center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+    <ul><li>
+        <p>
+        The prohibition of a logical comparison is not applied to the tester pin assigned to a branching DUT.
+        </p>
+        </li><li><p>
+        The value of the hold register for the tester pin assigned to a branching DUT is 0.
+        </p>
+    </li></ul>
+    </strong></td></tr></table></a></p></center>
+    </li><li><p>
+    Additional conditions for CHTYPE47
+    </p>
+    <ul><li>
+        <p>
+        A DUT using a function block other than the reference function block should not be assigned to tester pins that use the flash memory parallel measurement function.
+        </p>
+        </li><li><p>
+        When the BBM is used at the same time, the reference function block for the BBM and that for the flash memory parallel measurement function must be the same.
+        </p>
+    </li></ul>
+    <center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+    <ul><li>
+        <p>
+        The prohibition of a logical comparison is not applied to tester pins assigned to a DUT that uses a function block other than the reference function block.
+        </p>
+        </li><li><p>
+        Data cannot be read when specifying tester pins assigned to a DUT that uses a function block other than the reference function block.
+        </p>
+    </li></ul>
+    </strong></td></tr></table></a></p></center>
+</li></ul>
+<p>
+If any of the previously mentioned conditions are not satisfied, a runtime error can occur in the following functions:
+</p>
+<ul><li>
+    <p>
+    MCI : <a href="../../../ATFSsys/html/en/mci_en_UTL_SendFlash.html">UTL_SendFlash</a>(), <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFlashHold.html">UTL_ReadFlashHold</a>()
+    </p>
+    </li><li><p>
+    ATL : SELECT FLASH MODE statement, READ FLASH HOLD statement
+    </p>
+</li></ul>
+<p>
+Example of a socket program that defines a DUT using multiple function blocks:
+</p>
+<p><center><a name=""><img src="../../image/flash_T5830socket_sample02.gif"></a><br></center><p>
+<ul><li>
+    <p>
+    (Description)
+    </p>
+    <ul><li>
+        <p>
+        Because the MATCH connection condition is specified for tester pin 51, the function block that contains tester channels belonging to tester pin 51 is determined as the reference function block for each DUT.
+        </p>
+        </li><li><p>
+        Because tester channels for DUT2 and DUT3 are selected from multiple function blocks, the following restrictions are applied:
+        </p>
+        <ul><li>
+            <p>
+            Tester pin 37 cannot use the flash memory parallel measurement function because tester channel 165 for DUT2 and tester channel 101 for DUT3 are not in the reference function block.
+            </p>
+            </li><li><p>
+            The function to read data in the flash memory parallel measurement function is disabled for tester pin 37.
+            </p>
+        </li></ul>
+    </li></ul>
+</li></ul>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5831.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5822.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

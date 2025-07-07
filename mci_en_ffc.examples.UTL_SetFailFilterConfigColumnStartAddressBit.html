@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigAddrAssign.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnAddress.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigColumnStartAddressBit">Example of using UTL_SetFailFilterConfigColumnStartAddressBit()</a></h1>
+
+<p>
+Below is an example of page size 17664 (0x4500) which will be split into four equal regions.
+And start testing at column 0x1140 and test 4416 (0x1140) columns.
+</p>
+<p><center><a name="mci_ch12_FailFilter_FIG_ColumnStartAddressBit"><img src="../../image/mci_ch12_FailFilter_FIG_ColumnStartAddressBit.png"></a><br></center><p>
+<p>
+When the TRA address is returned in UBM mode or the X/Y address counters are read in bypass mode, it will include all the standard bits such as page, plane, block, and chip as well as the necessary bits to define the starting location within this page.
+</p>
+<p>
+The 17664 columns is defined with 15 column address bits.
+To use <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigColumnStartAddressBit.html">UTL_SetFailFilterConfigColumnStartAddressBit</a>(), we need to figure out which address bits are needed when starting a pattern at any of the 4 regions.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+                      14 13 12 | 11 10 09 08 | 07 06 05 04 | 03 02 01 00
+                     ----------|-------------|-------------|-------------
+        0 (0x0000)     0  0  0 |  0  0  0  0 |  0  0  0  0 |  0  0  0  0
+     4416 (0x1140)     0  0  1 |  0  0  0  1 |  0  1  0  0 |  0  0  0  0
+     8832 (0x2280)     0  1  0 |  0  0  1  0 |  1  0  0  0 |  0  0  0  0
+    13248 (0x33C0)     0  1  1 |  0  0  1  1 |  1  1  0  0 |  0  0  0  0
+</code></pre></td></tr></table></a></p>
+<p>
+A pattern can be started at any one of the 4 column addresses in the above table.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    USlider start_addr_bit_array[] = {6, 7, 8, 9, 12, 13} ;
+    USlider start_addr_bit_array_cnt = 6;
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigColumnStartAddressBit.html">UTL_SetFailFilterConfigColumnStartAddressBit</a>(ffCH,
+                                                 start_addr_bit_array,
+                                                 start_addr_bit_array_cnt);
+</code></pre></td></tr></table></a></p>
+<p>
+The additional column address bits 13, 12, 9, and 8 are now sent to the fail filter along with the page, plane, block, and chip address.
+TRA will retrieve these additional bits to determine the starting address for the 4 regions.
+When we retrieve the results from the Fail DB, the additional Y address bits will be used to reconstruct the column addresses.
+</p>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+The above example has specifically identified a limited number of column addresses to be returned.
+If you pick some other arbitrary starting location, some other column bits that were not added to the page, plane, block, and chip bits will be set.
+The address that is returned with TRA in UBM mode or X/Y address counters in bypass mode will not include those additional column bits, and so you will get incorrect results.
+</p>
+</strong></td></tr></table></a></p></center>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigAddrAssign.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnAddress.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

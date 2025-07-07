@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListBadBlock.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailList.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_WriteFailListBadBlock">Example of using UTL_WriteFailListBadBlock()</a></h1>
+
+<p>
+Below is an example to show how to write bad block information to the Fail DB.
+The number of failures is hard coded as three.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>(flAH, dut);
+
+        /********************************
+            Bad Block Determination
+         ********************************/
+
+        USlider     blockNum[3]; /* Array to hold 3 bad blocks        */
+        RadioButton reason[3];   /* Array to hold 3 bad block reasons */
+
+        blockNum[0] = 12;  reason[0] = UT_FL_FAIL_REASON_EXCEED_TFC_LIMIT;
+        blockNum[1] = 27;  reason[1] = UT_FL_FAIL_REASON_EXCEED_HT_LIMIT;
+        blockNum[2] = 49;  reason[2] = UT_FL_FAIL_REASON_EXCEED_RR_LIMIT;
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteFailListBadBlock.html">UTL_WriteFailListBadBlock</a>(flAH, blockNum, reason, 3);
+    }
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListBadBlock.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailList.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

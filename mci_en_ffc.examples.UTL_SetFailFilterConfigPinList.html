@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigStatusBytes.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigPinList">Example of using UTL_SetFailFilterConfigPinList()</a></h1>
+
+<ul><li>
+    <p>
+    Example 1: Capture 8 bits.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>(ffCH, 8);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>   (ffCH, 8);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH, 0, &quot;DQ_0_7&quot;, UT_ON, 1); /* ByteGroup=0, deviceChannel=1 */
+      :
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);  /* deviceChannel=1 */
+</code></pre></td></tr></table></a></p>
+<ul><li>
+    <p>
+    Example 2: Capture 8 bits plus up to 8 non-DQ pins.
+    </p>
+    <p>
+    The non-DQ pin list must also be 8 bits.
+    To capture less than 8 bits, just assign the extra pins to drive-only pins and there will be no fail data collected.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>(ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>   (ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  0, &quot;DQ_0_7&quot;, UT_ON,  1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  1, &quot;non_DQ&quot;, UT_OFF, 1);
+      :
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);  /* deviceChannel=1 */
+</code></pre></td></tr></table></a></p>
+<ul><li>
+    <p>
+    Example 3a: Capture 16 bits.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>(ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>   (ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  0, &quot;DQ_0_15&quot;, UT_ON, 1);
+      :
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);  /* deviceChannel=1 */
+</code></pre></td></tr></table></a></p>
+<ul><li>
+    <p>
+    Example 3b: Capture 16 bits.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>(ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>   (ffCH, 16);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  0, &quot;DQ_0_7&quot;,  UT_ON, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  1, &quot;DQ_8_15&quot;, UT_ON, 1);
+      :
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);  /* deviceChannel=1 */
+</code></pre></td></tr></table></a></p>
+<ul><li>
+    <p>
+    Example 4: Capture 8 bits x 4 channels.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>(ffCH, 32);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>   (ffCH, 32);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  0, &quot;DQ_0_7&quot;,   UT_ON, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  1, &quot;DQ_8_15&quot;,  UT_ON, 2);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  2, &quot;DQ_16_23&quot;, UT_ON, 3);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>   (ffCH,  3, &quot;DQ_24_31&quot;, UT_ON, 4);
+      :
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);  /* deviceChannel=1 */
+        or
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 2);  /* deviceChannel=2 */
+        or
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 3);  /* deviceChannel=3 */
+        or
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 4);  /* deviceChannel=4 */
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigStatusBytes.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

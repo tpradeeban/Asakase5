@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5833.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5830.html">[Next]</A>
+<HR>
+<h1><a name="flash.4.6.T5831">T5831</a></h1>
+
+<ul><li>
+    <p>
+    The number of DUTs tested in parallel within a site is 4 or less.
+    </p>
+    <p>
+    With a socket program specifying the I/O branch, the branched DUTs are handled as one.
+    However, if the minimum pin for which &quot;P&quot; is specified is not branched, that DUT is handled as a different DUT without branches.
+    </p>
+    <p>
+    When using the I/O branch, tester pins for which &quot;P&quot; or &quot;PC&quot; is specified need to satisfy all of the following conditions:
+    </p>
+    <ul><li>
+        <p>
+        (a) The combination of DUTs that branch tester channels is the same.
+        </p>
+        </li><li><p>
+        (b) The tester pin numbers of branched tester channels are smaller than the tester pin numbers of un-branched tester channels.
+        </p>
+    </li></ul>
+    <p>
+    Also when using the mask function, the following condition needs to be satisfied in addition to all preceding conditions:
+    </p>
+    <ul><li>
+        <p>
+        (c) The I/O branched DUTs branch tester channels that are assigned to all tester pins for which &quot;P&quot; or &quot;PC&quot; is specified.
+        </p>
+    </li></ul>
+</li></ul>
+<p><center><a name=""><img src="../../image/flash_socket_sample1.gif"></a><br></center><p>
+<ul><li>
+    <p>
+    Pins (for which &quot;P&quot; is specified), which are assigned to one DUT, are not assigned to multiple sites.
+    </p>
+    <p>
+    If &quot;PD&quot; is specified for those pins, they can be assigned to multiple sites but the mask function does not operate for pins of sites other than for which &quot;P&quot; is specified.
+    </p>
+</li></ul>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<ul><li>
+    <p>
+    A 1 site chain socket program cannot be used.
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5833.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5830.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

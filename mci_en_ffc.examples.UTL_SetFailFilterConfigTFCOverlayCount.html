@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigRepairRegion.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigAddrAssign.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigTFCOverlayCount">Example of using UTL_SetFailFilterConfigTFCOverlayCount()</a></h1>
+
+<p><center><a name="mci_ch12_FailFilter_FIG_Threshold"><img src="../../image/mci_ch12_FailFilter_FIG_Threshold.png"></a><br>Example</center><p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigTFCOverlayCount.html">UTL_SetFailFilterConfigTFCOverlayCount</a>(ffCH, UT_ON);
+    /* -&gt; All failures (total of 35) are counted. */
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigTFCOverlayCount.html">UTL_SetFailFilterConfigTFCOverlayCount</a>(ffCH, UT_OFF);
+    /* -&gt; Failures in the same bit (in the vertical direction in the diagram) are regarded as 1 failure.
+          Therefore, 14 failures are counted. */
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigRepairRegion.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigAddrAssign.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

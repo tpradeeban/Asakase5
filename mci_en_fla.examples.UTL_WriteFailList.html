@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListStatusBytes.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_WriteFailList">Example of using UTL_WriteFailList()</a></h1>
+
+<p>
+Below is an example to write failing addresses into the Fail DB.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    void WriteFailList(char * testname, int dc)
+    {
+        FailListAccessHandle flAH;
+        DutCursor dutcsr;
+        UT_DUT dut;
+        USlider *xList, *yList, *dqList, *ndqList, bufSize;
+        int i, x, y;
+        UT_DUT dut;
+        bufSize = 64;
+
+        xList   = (USlider *)calloc(1, bufSize * sizeof(USlider));
+        yList   = (USlider *)calloc(1, bufSize * sizeof(USlider));
+        dqList  = (USlider *)calloc(1, bufSize * sizeof(USlider));
+        ndqList = (USlider *)calloc(1, bufSize * sizeof(USlider));
+
+        i = 0;
+        for (y = 0; y &lt; 8; y++) {
+            for (x = 0; x &lt; 8; x++){
+                xList[i] = x;
+                yList[i] = y;
+                if (dc==1)
+                    dqList[i] =0xa5a5a5a5; ndqList[i]=0x96969696;
+                else
+                    dqList[i] =0x5a5a5a5a; ndqList[i]=0x69696969;
+                printf(&quot;%d x%d y%d dq%X ndq%X\n&quot;,
+                        i,xList[i],yList[i],dqList[i],ndqList[i]);
+                i++;
+            }
+        }
+
+        flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_NAME);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>   (flAH);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, testname);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, dc);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllBit.html">UTL_SetFailListAccessAllBit</a>       (flAH, UT_ON);
+
+        dutcsr = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetDutCursor.html">UTL_GetDutCursor</a>(UT_DDUT);
+        while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+            <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>(flAH, dut);
+            <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteFailList.html">UTL_WriteFailList</a>(flAH, xList, yList, dqList, ndqList, bufSize);
+        }
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteCursor.html">UTL_DeleteCursor</a>(dutcsr);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(flAH);
+    }
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListStatusBytes.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

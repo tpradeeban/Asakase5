@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigECCSectors.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigTFCOverlayCount.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigRepairRegion">Example of using UTL_SetFailFilterConfigRepairRegion()</a></h1>
+
+<p>
+If each main(core) is 1024 columns wide and each spare is 81 columns wide, the page size is 4 x (1024 + 81) = 4420.
+</p>
+<p><center><a name="mci_ch12_FailFilter_FIG_RepairRegion_1"><img src="../../image/mci_ch12_FailFilter_FIG_RepairRegion_1.png"></a><br>Example 1</center><p>
+<p>
+For the above example dividing into 2 repair regions, set up as follows:
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigRepairRegion.html">UTL_SetFailFilterConfigRepairRegion</a>(ffCH, 2, (4420 / 2),  0);
+                                              ~~  ~~~~~~~~~   ~~
+                                              *a     *b       *c
+
+        *a: Number of main/spare repair regions
+        *b: Number of columns per main repair region which includes spare repair region
+        *c: No spare repair region
+</code></pre></td></tr></table></a></p>
+<p><center><a name="mci_ch12_FailFilter_FIG_RepairRegion_2"><img src="../../image/mci_ch12_FailFilter_FIG_RepairRegion_2.png"></a><br>Example 2</center><p>
+<p>
+For the above example dividing into 2 repair regions, set up as follows:
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigRepairRegion.html">UTL_SetFailFilterConfigRepairRegion</a>(ffCH, 2, (1024 * 2), (81 * 2));
+                                              ~~  ~~~~~~~~~   ~~~~~~
+                                              *a     *b       *c
+
+        *a: Number of main/spare repair regions
+        *b: Number of columns per main repair region
+        *c: Number of columns per spare repair region
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigECCSectors.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigTFCOverlayCount.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

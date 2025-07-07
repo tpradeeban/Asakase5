@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5588.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5383.html">[Next]</A>
+<HR>
+<h1><a name="flash.4.6.T5385">T5385</a></h1>
+
+<p>
+The bit size is 1, 2, 4, 5, 8, 9, 10, 12, or 20
+</p>
+<ul><li>
+    <p>
+    Pins to be captured
+    </p>
+    <p>
+    Pins to be captured have the following restrictions:
+    </p>
+    <p><a name="T5385_FlashSocket"><table border="1" width="80%">
+<caption></caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">BIT</td><td valign="middle" bgcolor="#D8FEF0">Tester pin that can be captured in flash counter</td><td valign="middle" bgcolor="#D8FEF0">Restriction</td></tr>
+<tr><td valign="middle">1</td><td valign="middle">P33</td><td valign="middle">Can be used for the socket with up to 4 DUTs per pin block</td></tr>
+<tr><td valign="middle">2</td><td valign="middle">P33-34</td><td valign="middle">Can be used for the socket with up to 4 DUTs per pin block</td></tr>
+<tr><td valign="middle">4</td><td valign="middle">P33-36</td><td valign="middle">Can be used for the socket with up to 4 DUTs per pin block</td></tr>
+<tr><td valign="middle">5</td><td valign="middle">P33-36,P49</td><td valign="middle"></td></tr>
+<tr><td valign="middle">8</td><td valign="middle">P33-40</td><td valign="middle"></td></tr>
+<tr><td valign="middle">9 (case where P49A is used)</td><td valign="middle">P33-40,P49</td><td valign="middle"></td></tr>
+<tr><td valign="middle">9 (case where P33E is used)</td><td valign="middle">P33-40</td><td valign="middle">P49 is not a flash counter count target.</td></tr>
+<tr><td valign="middle">9 (case where P105 is used)</td><td valign="middle">-</td><td valign="middle">Cannot be used.</td></tr>
+<tr><td valign="middle">10</td><td valign="middle">P33-40 ,P49,P51</td><td valign="middle"></td></tr>
+<tr><td valign="middle">12</td><td valign="middle">P33-40</td><td valign="middle">P49, P51, P53, and P55 are not flash counter count targets</td></tr>
+<tr><td valign="middle">20</td><td valign="middle">P33-52</td><td valign="middle"></td></tr>
+<tr><td valign="middle">60</td><td valign="middle">-</td><td valign="middle">Cannot be used.</td></tr>
+
+</a></table></p>
+    <ul><li>
+        <p>
+        Pin block:  Block that exists for each CHILD pin, in the following units: (For the T5385, 24 pin blocks in total)
+        </p>
+        <ul><li>
+            <p>
+            Block of P1-52 pins
+            </p>
+            </li><li><p>
+            Block of P65-116 pins
+            </p>
+            </li><li><p>
+            Block of P129-180 pins
+            </p>
+        </li></ul>
+        </li><li><p>
+        With a socket program specifying the I/O branch, the branched DUTs are handled as one.
+        </p>
+        <p>
+        When using the I/O branch, tester pins for which &quot;P&quot; or &quot;PC&quot; is specified need to satisfy all of the following conditions:
+        </p>
+        <ul><li>
+            <p>
+            (a) The combination of DUTs that branch tester channels is the same.
+            </p>
+            </li><li><p>
+            (b) The tester pin numbers of branched tester channels are smaller than the tester pin numbers of un-branched tester channels.
+            </p>
+        </li></ul>
+        <p>
+        Also when using the mask function, the following condition needs to be satisfied in addition to all preceding conditions:
+        </p>
+        <ul><li>
+            <p>
+            (c) The I/O branched DUTs branch tester channels that are assigned to all tester pins for which &quot;P&quot; or &quot;PC&quot; is specified.
+            </p>
+        </li></ul>
+    </li></ul>
+</li></ul>
+<p><center><a name=""><img src="../../image/flash_socket_sample2.gif"></a><br></center><p>
+<ul><li>
+    <p>
+    Mask target pins
+    </p>
+    <p>
+    For more information on the mask target pins, refer to <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInh.html">UTL_SetPinPatternInh</a>().
+    </p>
+</li></ul>
+<p>
+The bit size is 1, 2, 4, 5, 8, 9, 10, or 12
+</p>
+<ul><li>
+    <p>
+    The order of DUT numbers for pin group (*a) of tester channels must be the same for all pin blocks (*b).
+    </p>
+    <ul><li>
+        <p>
+        (*a) Pin group of tester channels: Any one of P33-(33 + n - 1), P(33 + n)-(33 + nx2 - 1), ...
+        </p>
+        </li><li><p>
+        (*b) Pin block: Any one of P33-P52, P97-116, P161-180
+        </p>
+        </li><li><p>
+        The following is an example of when the DUT bit configuration is 4:
+        </p>
+        <p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+Pin block      |     1     |     2     |     3     |     4     |     5    &lt;-- Pin group number
+---------------+-----------+-----------+-----------+-----------+-----------
+P 33A block    | P 33- 36A | P 37- 40A | P 41- 44A | P 45- 48A | P 49- 52A
+P 97A block    | P 97-100A | P101-104A | P105-108A | P109-112A | P113-116A
+P161A block    | P161-164A | P165-168A | P169-172A | P173-176A | P177-180A
+P 33B block    | P 33- 36B | P 37- 40B | P 41- 44B | P 45- 48B | P 49- 52B
+:              | :         | :         | :         | :         | :
+        </code></pre></td></tr></table></a></p>
+        <p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+[Socket program that does not violate the restriction]
+
+;;                 Pin group number    Order of DUT numbers
+DUT4 = P33-36A     ;;      1                 4  --+
+DUT3 = P37-40A     ;;      2                 3    |
+DUT2 = P41-44A     ;;      3                 2    | &lt;--+
+DUT1 = P45-48A     ;;      4                 1  --+    | The order of DUT numbers for pin group numbers
+;;                                                     | is the same for all pin blocks.
+DUT8 = P33-36B     ;;      1                 4  --+    |
+DUT7 = P37-40B     ;;      2                 3    | &lt;--+
+DUT6 = P41-44B     ;;      3                 2    |
+DUT5 = P45-48B     ;;      4                 1  --+
+        </code></pre></td></tr></table></a></p>
+        <p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+[Socket program that violates the restriction]
+
+;;                 Pin group number    Order of DUT numbers
+DUT1 = P33-36A     ;;      1                 1  --+
+DUT2 = P37-40A     ;;      2                 2    |
+DUT3 = P41-44A     ;;      3                 3    | &lt;--+
+DUT4 = P45-48A     ;;      4                 4  --+    | The order of DUT numbers for pin group numbers
+;;                                                     | is different for each pin block.
+DUT8 = P33-36B     ;;      1                 4  --+    |
+DUT7 = P37-40B     ;;      2                 3    | &lt;--+
+DUT6 = P41-44B     ;;      3                 2    |
+DUT5 = P45-48B     ;;      4                 1  --+
+        </code></pre></td></tr></table></a></p>
+        </li><li><p>
+        When the order of DUT numbers for pin group numbers must be different for each pin block, for reasons such as communication restrictions between the prober,
+        use the SYSTEMDUT statement.
+        </p>
+        <p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+SYSTEMDUT1 = SITE1, DUT1
+SYSTEMDUT2 = SITE1, DUT2
+SYSTEMDUT3 = SITE1, DUT3
+SYSTEMDUT4 = SITE1, DUT4
+SYSTEMDUT5 = SITE1, DUT8
+SYSTEMDUT6 = SITE1, DUT7
+SYSTEMDUT7 = SITE1, DUT6
+SYSTEMDUT8 = SITE1, DUT5
+        </code></pre></td></tr></table></a></p>
+    </li></ul>
+</li></ul>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.T5588.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5383.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

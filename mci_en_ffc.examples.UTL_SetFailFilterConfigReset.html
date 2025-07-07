@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnAddress.html">[Prev]</A>
+<A HREF="mci_en_fla.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigReset">Example of using UTL_SetFailFilterConfigReset()</a></h1>
+
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    FailFilterConfigHandle ffCH;
+
+    ffCH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailFilterConfigHandle.html">UTL_GetFailFilterConfigHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAction.html">UTL_SetFailFilterConfigAction</a>                   (ffCH, UT_FF_UBM);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigDutBitSize.html">UTL_SetFailFilterConfigDutBitSize</a>               (ffCH, BIT_SIZE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBitSize.html">UTL_SetFailFilterConfigBitSize</a>                  (ffCH, BIT_SIZE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPinList.html">UTL_SetFailFilterConfigPinList</a>                  (ffCH, 0, &quot;TARGET_DQs&quot;, UT_ON, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigNibbleMode.html">UTL_SetFailFilterConfigNibbleMode</a>               (ffCH, UT_FF_NIBBLE_DISABLE);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigBlockSize.html">UTL_SetFailFilterConfigBlockSize</a>                (ffCH, PAGE_COUNT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigStatusBytes.html">UTL_SetFailFilterConfigStatusBytes</a>              (ffCH, 0);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigPageSize.html">UTL_SetFailFilterConfigPageSize</a>                 (ffCH, COLUMN_COUNT);
+
+    if (LT &gt; 0)
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigLowThreshold.html">UTL_SetFailFilterConfigLowThreshold</a>         (ffCH, countMethod, LT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigHighThreshold.html">UTL_SetFailFilterConfigHighThreshold</a>            (ffCH, countMethod, HT);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigRepairRegionHighThreshold.html">UTL_SetFailFilterConfigRepairRegionHighThreshold</a>(ffCH, countMethod, RR);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigTFCHighThreshold.html">UTL_SetFailFilterConfigTFCHighThreshold</a>         (ffCH, countMethod, TFC);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigMode.html">UTL_SetFailFilterConfigMode</a>                     (ffCH, UT_FF_LT, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigFailListCounterSelect.html">UTL_SetFailFilterConfigFailListCounterSelect</a>    (ffCH, UT_FF_ALL_CNTRS, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigTFCOverlayCount.html">UTL_SetFailFilterConfigTFCOverlayCount</a>          (ffCH, UT_OFF);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigECCSectors.html">UTL_SetFailFilterConfigECCSectors</a>               (ffCH, ECC_SECTORS_PER_PAGE,
+        (COLUMN_COUNT)/ECC_SECTORS_PER_PAGE, 0);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigRepairRegion.html">UTL_SetFailFilterConfigRepairRegion</a>             (ffCH, ECC_SECTORS_PER_PAGE/2,
+        (COLUMN_COUNT)/(ECC_SECTORS_PER_PAGE/2), 0);
+
+    /* Here, execute address assignments */
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigReset.html">UTL_SetFailFilterConfigReset</a>                    (ffCH, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SendFailFilterConfig.html">UTL_SendFailFilterConfig</a>                        (ffCH);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnAddress.html">[Prev]</A>
+<A HREF="mci_en_fla.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_memmodule.html">[Up]</A>
+<A HREF="mci_en_memmodule.html">[Prev]</A>
+<A HREF="mci_en_memmodule.setpurpose.html">[Next]</A>
+<HR>
+<h1><a name="memmodule.what">Memory Module</a></h1>
+
+<p>
+In this manual, the memory module generically refers to the following memories:
+</p>
+<ul><li>
+    <p>
+    Fail capture memory (FCM)
+    </p>
+    </li><li><p>
+    Pattern memory (PM)
+    </p>
+    </li><li><p>
+    Data buffer memory (DBM)
+    </p>
+    </li><li><p>
+    Fail buffer memory (FBM)
+    </p>
+    <p>
+    FBM is memory used for repair analysis.
+    </p>
+</li></ul>
+<p>
+The purpose of the memory module (whether to use the memory module as the FCM, PM, etc.) is referred to as the &quot;usage-mode&quot;.
+</p>
+<p>
+Depending on test systems, one memory module contains two or more usage-modes, and it is used by switching those modes. When using such a module, usage-modes must be set before using the memory module. For more information on usage-modes settings, refer to <a href="mci_en_memmodule.setpurpose.html">&quot;MCIs that Set Memory Module Usage-Modes&quot;</a>.
+</p>
+<p><a name="table_memmodule.what-1"><table border="1" width="80%">
+<caption>Usage-Modes that Can Be Switched within One Memory Module</caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Tester name</td><td valign="middle" bgcolor="#D8FEF0">Usage-mode that can be set for one memory module</td></tr>
+<tr><td valign="middle">T5833</td><td valign="middle">FCM, DBM, FBM</td></tr>
+<tr><td valign="middle">T5830</td><td valign="middle">FCM, DBM</td></tr>
+<tr><td valign="middle">T5822</td><td valign="middle">FCM, DBM, FBM</td></tr>
+<tr><td valign="middle">T5781</td><td valign="middle">FCM, PM, DBM</td></tr>
+<tr><td valign="middle">T5761</td><td valign="middle">FCM, PM, DBM</td></tr>
+<tr><td valign="middle">T5588</td><td valign="middle">FCM, PM, DBM</td></tr>
+<tr><td valign="middle">T5511</td><td valign="middle">DBM</td></tr>
+<tr><td valign="middle">T5385</td><td valign="middle">FCM, PM, DBM</td></tr>
+<tr><td valign="middle">T5383</td><td valign="middle">PM, DBM</td></tr>
+
+</a></table></p>
+<HR>
+<A HREF="mci_en_memmodule.html">[Up]</A>
+<A HREF="mci_en_memmodule.html">[Prev]</A>
+<A HREF="mci_en_memmodule.setpurpose.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListStatusBytes.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListTfcCountList.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_ReadFailListFlashCounters">Example of using UTL_ReadFailListFlashCounters()</a></h1>
+
+<p>
+Below is an example to read the flash counter values over some range of pages.
+</p>
+<p>
+If there are 4 pages and 2 planes, there would be 8 flash counter values in total.
+The values would be accessed like this:
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    pagex[0] = 0,  pagey[0] = 0,  datalist[0] = Flash counter value for page 0, plane 0
+    pagex[1] = 0,  pagey[1] = 0,  datalist[1] = Flash counter value for page 0, plane 1
+    pagex[2] = 1,  pagey[2] = 0,  datalist[2] = Flash counter value for page 1, plane 0
+    pagex[3] = 1,  pagey[3] = 0,  datalist[3] = Flash counter value for page 1, plane 1
+    pagex[4] = 2,  pagey[4] = 0,  datalist[4] = Flash counter value for page 2, plane 0
+    pagex[5] = 2,  pagey[5] = 0,  datalist[5] = Flash counter value for page 2, plane 1
+    pagex[6] = 3,  pagey[6] = 0,  datalist[6] = Flash counter value for page 3, plane 0
+    pagex[7] = 3,  pagey[7] = 0,  datalist[7] = Flash counter value for page 3, plane 1
+</code></pre></td></tr></table></a></p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    USlider pagecount = 0, valuecount = 0;
+    USlider *pagex, *pagey, *datalist, *overflowlist;
+    /*
+      pagecount  is the total number of pages within the range being checked.
+
+      valuecount is the total number of values to be returned.
+      If 256 pages and 2 planes, valuecount is 512.
+     */
+
+    FailListAccessHandle flAH:
+    DutCursor dutcsr;
+    UT_DUT dut;
+
+    flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>   (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, testname);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllBit.html">UTL_SetFailListAccessAllBit</a>       (flAH, UT_ON);
+
+    dutcsr = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetDutCursor.html">UTL_GetDutCursor</a>(UT_DDUT);
+    while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>  (flAH, dut);
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessXAddr.html">UTL_SetFailListAccessXAddr</a>(flAH, 0x0, PAGES_PER_BLOCK * BLOCK_COUNT - 1);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessYAddr.html">UTL_SetFailListAccessYAddr</a>(flAH, 0,   COLUMNS_PER_PAGE - 1);
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessRecordType.html">UTL_SetFailListAccessRecordType</a>(flAH, UT_FL_RECORD_COUNT_FLASH_COUNTER);
+
+        /* Obtain the values for pagecount and valuecount */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListRecordCount.html">UTL_ReadFailListRecordCount</a>(flAH, &amp;pagecount, &amp;valuecount);
+
+        pagex = NULL, pagey = NULL, datalist = NULL, overflowlist = NULL;
+
+        if (pagecount &gt; 0) {
+            pagex = malloc(pagecount * sizeof(USlider));           /* Array to hold page numbers   */
+            pagey = malloc(pagecount * sizeof(USlider));           /* Array to hold column numbers */
+        }
+        if (valuecount &gt; 0) {
+            datalist       = malloc(valuecount * sizeof(USlider)); /* Array to hold count values   */
+            overflowlist   = malloc(valuecount * sizeof(USlider)); /* Array to hold overflowlist   */
+            memset(overflowlist, 0, valuecount * sizeof(USlider)); /* Since not used, set to 0.    */
+        }
+
+        /* Read pagex, pagey, and datalist using pagecount to specify how many pages to read */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListFlashCounters.html">UTL_ReadFailListFlashCounters</a>(flAH, pagex, pagey, datalist, pagecount);
+
+        int page, plane, num_counters_per_page;
+
+        /* For multi-plane, there will be multiple flash counts per page */
+        num_counters_per_page = valuecount / pagecount;
+
+        for (page = 0; page &lt; pagecount; page++) {
+            printf(&quot;page[%d] x=%d y=%d (data, overflow)\n&quot;, page, pagex[page], pagey[page]);
+
+            for (plane = 0; plane &lt; num_counters_per_page; plane++) {
+                printf(&quot;(%d %d) &quot;, datalist    [page * num_counters_per_page + plane],
+                                   overflowlist[page * num_counters_per_page + plane]);
+            }
+            printf(&quot;\n&quot;);
+        }
+
+        if (pagex)        { free(pagex);        pagex        = NULL; }
+        if (pagey)        { free(pagey);        pagey        = NULL; }
+        if (datalist)     { free(datalist);     datalist     = NULL; }
+        if (overflowlist) { free(overflowlist); overflowlist = NULL; }
+
+    } /* dutcsr*/
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteCursor.html">UTL_DeleteCursor</a>(dutcsr);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(flAH);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListStatusBytes.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListTfcCountList.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

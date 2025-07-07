@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_SourceSyncCpInterface.html">[Up]</A>
+<A HREF="mci_en_SourceSyncCpInterface.html">[Prev]</A>
+<A HREF="mci_en_SourceSyncCp.html">[Next]</A>
+<HR>
+<h1><a name="SourceSyncCp_outline">Outline</a></h1>
+
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<p>
+The source sync comparator can be used for the following systems:
+</p>
+<ul><li>
+    <p>
+    T5833
+    </p>
+    </li><li><p>
+    T5832
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<p>
+The source sync comparator converts differential input of Posi and Nega pins into single-ended output and performs comparison judgments.
+</p>
+<p>
+Comparison judgment is made based on VOH and VOL on the Posi pin, and the result is also stored on the Posi pin side.
+</p>
+<ul><li>
+    <p>
+    In terms of hardware, Posi and Nega pins are paired for operation as follows:
+    </p>
+    <pre>
++------+------+ +------+------+ +------+------+ +------+------+
+| Posi | Nega | | Posi | Nega | | Posi | Nega | | Posi | Nega |
++------+------+ +------+------+ +------+------+ +------+------+
+|  49  |   8  | | 177  | 136  | | 305  | 264  | | 433  | 392  |
++------+------+ +------+------+ +------+------+ +------+------+
+|  50  |  16  | | 178  | 144  | | 306  | 272  | | 434  | 400  |
++------+------+ +------+------+ +------+------+ +------+------+
+| 113  |  72  | | 241  | 200  | | 369  | 328  | | 497  | 456  |
++------+------+ +------+------+ +------+------+ +------+------+
+| 114  |  80  | | 242  | 208  | | 370  | 336  | | 498  | 464  |
++------+------+ +------+------+ +------+------+ +------+------+
+    </pre>
+    <p><center><a name="T533_SourceSyncCP_Unit"><img src="../../image/T5833_SourceSyncCP.png"></a><br>Source Sync Comparator Circuit Diagram</center><p>
+</li></ul>
+<HR>
+<A HREF="mci_en_SourceSyncCpInterface.html">[Up]</A>
+<A HREF="mci_en_SourceSyncCpInterface.html">[Prev]</A>
+<A HREF="mci_en_SourceSyncCp.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

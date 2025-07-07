@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ebm.html">[Up]</A>
+<A HREF="mci_en_ebm.html">[Prev]</A>
+<A HREF="mci_en_ebmc.html">[Next]</A>
+<HR>
+<h1><a name="ebm.overview">Overview</a></h1>
+
+<p>
+The external buffer memory (EBM) is used to generate random pages (*1) of data to be later loaded into the buffer memory (BM) as needed by the pattern for read and write operations.
+</p>
+<ul><li>
+    <p>
+    (*1) Page (or plane) will be referred to as &quot;transfer area&quot; in this manual.
+    A transfer area may consist of multiple pages (or planes) depending on the memory device being tested.
+    </p>
+</li></ul>
+<p><center><a name=""><img src="../../image/mci_Ebm_FIG_BlockDiagram.png"></a><br></center><p>
+<ul><li>
+    <p>
+    (a): Transfer area(s)
+    </p>
+    </li><li><p>
+    (b): Automatically generated signal to request more transfer area(s) to be loaded into the iBM
+    </p>
+    </li><li><p>
+    (c): JBF instruction to wait for the completion of transfer
+    </p>
+    </li><li><p>
+    (d): MUT signal specified by user to request another transfer area to be sent
+    </p>
+</li></ul>
+<p>
+The EBM resides in the memory space of the test site controller (TSC).
+It is large enough to hold many data, typically one or several blocks.
+Data is transferred to the intermediate buffer memory (iBM), a 72K x 16 memory, which holds several transfer areas.
+And then on to the BM which resides in the ALPG.
+The BM is small and holds one transfer area at a time.
+</p>
+<p>
+The transfer of data from the EBM to the BM happens while the pattern is running.
+A MUT signal is defined to be used within a pattern to request a transfer area from the EBM.
+This is followed by a JBF instruction to hold the pattern at a vector while the transfer completes.
+Once the JBF instruction has cleared, the pattern then continues and the instruction DS is used to present the BM data to the ALPG for a read or write operation.
+The BMINC instruction is used to increment the BM to the next column.
+It resets when a new transfer area is loaded.
+This repeats until the entire transfer area is complete.
+</p>
+<p>
+As an example, consider a DUT with a transfer size of 17664 columns.
+The iBM is large enough to hold 8 transfer areas of data.
+The pattern will continue to use the MUT signal to transfer one transfer area at a time to the BM.
+But when the 8 transfers complete, the EBM will reload the iBM up with the next 8 transfer areas to be transferred.
+</p>
+<p>
+The transfer size is normally set to the same size as the DUT page size.
+In the preceding example, the transfer size would be set to 17664 columns.
+But it is not necessary to have the transfer size be equal to the DUT page size.
+The transfer size can be a multiple such as 2 x the DUT page size, first do a page program operation and then a page read operation.
+In the pattern, use the BMINC instruction to move the BM column pointer.
+So after doing the page program operation, the pointer is now ready to do the second half for the read operation.
+</p>
+<p>
+<a href="mci_en_ebmc.details.html">Setting the Operating Conditions for External Buffer Memory</a> are MCIs used to set the operating conditions for the EBM.
+</p>
+<p>
+<a href="mci_en_ebmc.details.html">Accessing External Buffer Memory</a> are MCIs used to write data to the EBM.
+</p>
+<HR>
+<A HREF="mci_en_ebm.html">[Up]</A>
+<A HREF="mci_en_ebm.html">[Prev]</A>
+<A HREF="mci_en_ebmc.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

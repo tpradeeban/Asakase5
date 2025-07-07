@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllDut.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllBit.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_SetFailListAccessDeviceChannel">Example of using UTL_SetFailListAccessDeviceChannel()</a></h1>
+
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    DutCursor dutcsr;
+    UT_DUT dut;
+
+    flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>   (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, testname);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1); /* Specify the target device channel to be read */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllBit.html">UTL_SetFailListAccessAllBit</a>       (flAH, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllDut.html">UTL_SetFailListAccessAllDut</a>       (flAH, UT_OFF);
+
+    dutcsr = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetDutCursor.html">UTL_GetDutCursor</a>(UT_DDUT);
+    while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>(flAH, dut);
+
+        /* Here, read data from the Fail DB */
+    }
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteCursor.html">UTL_DeleteCursor</a>(dutcsr);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllDut.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllBit.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

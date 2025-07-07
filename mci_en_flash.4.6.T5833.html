@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5831.html">[Next]</A>
+<HR>
+<h1><a name="flash.4.6.T5833">T5833</a></h1>
+
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<ul><li>
+    <p>
+    Two functions to prohibit logical comparison are provided. (Mask function)
+    </p>
+    <ul><li>
+        <p>
+        Function that prohibits logical comparison regardless of the limit value of the flash counter
+        </p>
+        </li><li><p>
+        Function that prohibits logical comparison when the flash counter reaches the limit value
+        </p>
+    </li></ul>
+    <p>
+    The function that prohibits logical comparison regardless of the limit value of the flash counter cannot be used. If used, a runtime error occurs.
+    </p>
+    </li><li><p>
+    To use the mask function of the flash memory parallel measurement function together with that of the BBM function, the following reference function blocks assigned to each DUT must be the same:
+    </p>
+    <ul><li>
+        <p>
+        Reference function block determined by the flash memory parallel measurement function
+        </p>
+        </li><li><p>
+        Reference function block determined by the BBM function
+        </p>
+    </li></ul>
+    </li><li><p>
+    Pin conditions must be specified in advance when using the flash memory parallel measurement function.
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<p>
+If all of the following conditions (a) to (c) are satisfied, the flash memory parallel measurement function can be used without restrictions.
+</p>
+<ul><li>
+    <p>
+    Condition (a): Each DUT uses tester channels that are assigned to a single function block.
+    </p>
+    </li><li><p>
+    Condition (b): I/O branches are not used.
+    </p>
+    </li><li><p>
+    Condition (c): The number of parallel measurement DUTs per function block is four or less.
+    </p>
+</li></ul>
+<p>
+Four function blocks that are assigned to units of 128 tester channels are provided for each child as follows:
+</p>
+<p><a name="func_block_group"><table border="1" width="80%">
+<caption></caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Function block</td><td valign="middle" bgcolor="#D8FEF0">Driver channel</td><td valign="middle" bgcolor="#D8FEF0">I/O channel</td></tr>
+<tr><td valign="middle">1</td><td valign="middle">1 to 16, 65 to 80</td><td valign="middle">33 to 52, 97 to 116</td></tr>
+<tr><td valign="middle">2</td><td valign="middle">129 to 144, 193 to 208</td><td valign="middle">161 to 180, 225 to 244</td></tr>
+<tr><td valign="middle">3</td><td valign="middle">257 to 272, 321 to 336</td><td valign="middle">289 to 308, 353 to 372</td></tr>
+<tr><td valign="middle">4</td><td valign="middle">385 to 400, 449 to 464</td><td valign="middle">417 to 436, 481 to 500</td></tr>
+
+</a></table></p>
+<p>
+Example socket program that can use the flash memory parallel measurement function without restrictions:
+</p>
+<p><center><a name=""><img src="../../image/flash_T5833socket_sample3.gif"></a><br></center><p>
+<ul><li>
+    <p>
+    (Description)
+    </p>
+    <ul><li>
+        <p>
+        Because all of conditions (a) to (c) are satisfied, the flash memory parallel measurement function can be used without restrictions.
+        </p>
+    </li></ul>
+</li></ul>
+<p>
+If conditions (a) and (b) are not satisfied, the flash memory parallel measurement function can be used under the following restrictions:
+</p>
+<ul><li>
+    <p>
+    When condition (a) is not satisfied:
+    </p>
+    <p>
+    In the flash memory parallel measurement function, each DUT cannot operate by using multiple function blocks.
+    </p>
+    <p>
+    Therefore, a DUT that uses multiple function blocks is assigned to one of those function blocks.
+    </p>
+    <p>
+    The function block that each DUT is assigned is defined as the reference function block.
+    </p>
+    <p>
+    Tester channels that use a function block other than the reference function block cannot use the flash memory parallel measurement function.
+    </p>
+    <p>
+    Reference function block definition method:
+    </p>
+    <ul><li>
+        <p>
+        If MATCH connection conditions have been specified for tester pins, the function block that contains tester channels belonging under the lowest numbered tester pin from those pins is the reference block.
+        </p>
+        </li><li><p>
+        If there is not a tester pin for which MATCH connection conditions have been specified, the function block that contains tester channels belonging under the lowest numbered tester pin specified with P or PC is the reference block.
+        </p>
+    </li></ul>
+    <p>
+    Restrictions on tester channels in a function block other than the reference function block:
+    </p>
+    <ul><li>
+        <p>
+        If tester channels assigned to all tester pins specified with P or PC are not in a single function block, the following function does not operate:
+        </p>
+        <ul><li>
+            <p>
+            Function that prohibits logical comparison when the flash counter reaches the limit value
+            </p>
+        </li></ul>
+        <p>
+        Note, however, that logical comparison is prohibited with respect only to pins in the reference function block when this function is used together with the mask function of the BBM function.
+        </p>
+        </li><li><p>
+        For the following functions, tester pins including a DUT that uses a function block other than the reference function block cannot be specified. If specified, a runtime error occurs.
+        </p>
+        <ul><li>
+            <p>
+            Driver output prohibition function of the flash memory parallel measurement function
+            </p>
+            </li><li><p>
+            Data reading function of the flash memory parallel measurement function
+            </p>
+        </li></ul>
+        </li><li><p>
+        If MATCH connection conditions are specified for multiple tester pins, a single function block needs to be used. If multiple function blocks are used, a runtime error occurs.
+        </p>
+    </li></ul>
+    <p>
+    Example socket program that does not satisfy condition (a):
+    </p>
+    <p><center><a name=""><img src="../../image/flash_T5833socket_sample2.gif"></a><br></center><p>
+    <ul><li>
+        <p>
+        (Description)
+        </p>
+        <ul><li>
+            <p>
+            Because the MATCH connection condition is specified for the P51 tester pin, the function block that contains tester channels belonging to the P51 tester pin is determined as the reference function block for each DUT.
+            </p>
+            </li><li><p>
+            Because tester channels for DUT7 and DUT8 are selected from multiple function blocks, the following restrictions apply:
+            </p>
+            <ul><li>
+                <p>
+                The flash memory parallel measurement function cannot be used for P361A and P362A of DUT7, and P233A and P234A of DUT8.
+                </p>
+                </li><li><p>
+                The function that prohibits logical comparison when the flash counter reaches the limit value does not operate.
+                </p>
+                </li><li><p>
+                For P33, P34, P39, and P40 tester pins, the data reading function of the flash memory parallel measurement function is disabled.
+                </p>
+            </li></ul>
+            </li><li><p>
+            For the PD5 tester pin, the driver output prohibition function is enabled because all DUTs are selected from the reference function block.
+            </p>
+        </li></ul>
+    </li></ul>
+    </li><li><p>
+    When condition (b) is not satisfied:
+    </p>
+    <center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+    <ul><li>
+        <p>
+        When specifying a socket program that uses I/O branch settings, use &quot;MCIs that set the number of times tester hardware resources are used and signals for switching those resources&quot;.
+        </p>
+        </li><li><p>
+        When &quot;MCIs that set the number of times tester hardware resources are used and signals for switching those resources&quot; are used, the function that prohibits logical comparison when the flash counter reaches the limit value is disabled. (Mask function)
+        </p>
+    </li></ul>
+    </strong></td></tr></table></a></p></center>
+    <p>
+    If a tester pin that is specified with P or PC branches (I/O branch) to DUTs, those DUTs are handled as a single DUT.
+    </p>
+    <p>
+    Method of I/O branch recognition:
+    </p>
+    <ul><li>
+        <p>
+        Whether the tester pin with the MATCH connection condition setting is a branch pin
+        </p>
+        </li><li><p>
+        Whether the lowest numbered pin specified with P or PC is a branch pin, if a tester pin with the MATCH connection condition setting does not exist.
+        </p>
+    </li></ul>
+    <p>
+    For the following socket program, I/O branch recognition criteria differs according to the pin condition settings:
+    </p>
+    <p><center><a name=""><img src="../../image/flash_T5833socket_sample1.gif"></a><br></center><p>
+    <ul><li>
+        <p>
+        (Description)
+        </p>
+        <ul><li>
+            <p>
+            Whether I/O branch pins are used can be recognized as follows:
+            </p>
+            <ul><li>
+                <p>
+                If a MATCH connection condition is specified for the P51 tester pin, whether branch pins are used can be recognized by the P51 tester pin.
+                Because DUT1 to DUT4 do not use branch pins, the number of parallel measurement DUTs per function block is four.
+                </p>
+                </li><li><p>
+                If a MATCH connection condition is not specified, whether branch pins are used can be recognized by the P33 tester pin.
+                Because DUT1 and DUT2, and DUT3 and DUT4 respectively use branch pins, the number of parallel measurement DUTs per function block is two.
+                </p>
+            </li></ul>
+        </li></ul>
+    </li></ul>
+</li></ul>
+<center><p><a name=""><table border="1" cellpadding="5" width="80%"><tr><td align="center" valign="middle" bgcolor="#CCCC99"><font color="RED">CAUTION</font></td></tr><tr><td valign="middle" bgcolor="#FFFF33"><strong>
+<ul><li>
+    <p>
+    The driver output prohibition function cannot be specified for level driver channels.
+    </p>
+</li></ul>
+</strong></td></tr></table></a></p></center>
+<HR>
+<A HREF="mci_en_flash.4.6.html">[Up]</A>
+<A HREF="mci_en_flash.4.6.html">[Prev]</A>
+<A HREF="mci_en_flash.4.6.T5831.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

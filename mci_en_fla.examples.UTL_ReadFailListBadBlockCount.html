@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllBit.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListBadBlock.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_ReadFailListBadBlockCount">Example of using UTL_ReadFailListBadBlockCount()</a></h1>
+
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>(flAH, dut);
+
+        /********************************
+            Bad Block Determination
+         ********************************
+
+         Store the number of bad blocks that were detected in countBadBlock[dut-1].
+
+         The value of argument 'status' will be either:
+         0: UT_FL_COUNT_STATUS_COMPLETE
+         1: UT_FL_COUNT_STATUS_OVERFLOW
+
+         */
+
+        countBadBlock[dut-1] = <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListBadBlockCount.html">UTL_ReadFailListBadBlockCount</a>(flAH, &amp;status);
+    }
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_SetFailListAccessAllBit.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListBadBlock.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

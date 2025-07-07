@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_flash.html">[Prev]</A>
+<A HREF="mci_en_flash.2.html">[Next]</A>
+<HR>
+<h1><a name="flash.1">Objective</a></h1>
+
+<p>
+These MCIs are used to set up the flash memory test functions and read the result of flash memory test.
+During multiple devices in parallel test, excessive writing operations for each DUT need to be prevented.
+</p>
+<p>
+Therefore, logical comparison and driver output for each DUT have to be disabled in real time.
+</p>
+<p>
+Logical comparison and driver output can be disabled for the following DUTs.
+</p>
+<ul><li>
+    <p>
+    DUTs which all pins are matched
+    </p>
+    </li><li><p>
+    DUTs in which the flash counters match the limit registers
+    </p>
+    </li><li><p>
+    DUTs which have been masked
+    </p>
+</li></ul>
+<p>
+Pins with disabled driver output are specified as <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInh.html">UTL_SetPinPatternInh</a>()
+or <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>().
+Therefore, logical comparison is also prohibited with regard to pins specified as <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinPatternInhPerPin.html">UTL_SetPinPatternInhPerPin</a>().
+</p>
+<HR>
+<A HREF="mci_en_flash.html">[Up]</A>
+<A HREF="mci_en_flash.html">[Prev]</A>
+<A HREF="mci_en_flash.2.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

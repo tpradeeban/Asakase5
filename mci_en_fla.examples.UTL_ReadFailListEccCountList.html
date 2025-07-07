@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListTfcCountList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListRrCountList.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_ReadFailListEccCountList">Example of using UTL_ReadFailListEccCountList()</a></h1>
+
+<p>
+A page can be subdivided into a number of ECC sectors.
+Refer to <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigECCSectors.html">UTL_SetFailFilterConfigECCSectors</a>().
+</p>
+<p>
+Below is an example to read each ECC counter value over some range of pages.
+</p>
+<p>
+If there are 4 pages, 2 planes, and 4 ECC sectors per plane, there would be 4 x 2 x 4 = 32 ECC counter values in total.
+The values would be accessed like this:
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    pagex[ 0] = 0,  pagey[ 0] = 0,  datalist[ 0] = ECC counter value 0 for page 0, plane 0
+    pagex[ 1] = 0,  pagey[ 1] = 0,  datalist[ 1] = ECC counter value 1 for page 0, plane 0
+    pagex[ 2] = 0,  pagey[ 2] = 0,  datalist[ 2] = ECC counter value 2 for page 0, plane 0
+    pagex[ 3] = 0,  pagey[ 3] = 0,  datalist[ 3] = ECC counter value 3 for page 0, plane 0
+    pagex[ 4] = 0,  pagey[ 4] = 0,  datalist[ 4] = ECC counter value 0 for page 0, plane 1
+    pagex[ 5] = 0,  pagey[ 5] = 0,  datalist[ 5] = ECC counter value 1 for page 0, plane 1
+    pagex[ 6] = 0,  pagey[ 6] = 0,  datalist[ 6] = ECC counter value 2 for page 0, plane 1
+    pagex[ 7] = 0,  pagey[ 7] = 0,  datalist[ 7] = ECC counter value 3 for page 0, plane 1
+    pagex[ 8] = 1,  pagey[ 8] = 0,  datalist[ 8] = ECC counter value 0 for page 1, plane 0
+    pagex[ 9] = 1,  pagey[ 9] = 0,  datalist[ 9] = ECC counter value 1 for page 1, plane 0
+    pagex[10] = 1,  pagey[10] = 0,  datalist[10] = ECC counter value 2 for page 1, plane 0
+    pagex[11] = 1,  pagey[11] = 0,  datalist[11] = ECC counter value 3 for page 1, plane 0
+    pagex[12] = 1,  pagey[12] = 0,  datalist[12] = ECC counter value 0 for page 1, plane 1
+    pagex[13] = 1,  pagey[13] = 0,  datalist[13] = ECC counter value 1 for page 1, plane 1
+    pagex[14] = 1,  pagey[14] = 0,  datalist[14] = ECC counter value 2 for page 1, plane 1
+    pagex[15] = 1,  pagey[15] = 0,  datalist[15] = ECC counter value 3 for page 1, plane 1
+    pagex[16] = 2,  pagey[16] = 0,  datalist[16] = ECC counter value 0 for page 2, plane 0
+    pagex[17] = 2,  pagey[17] = 0,  datalist[17] = ECC counter value 1 for page 2, plane 0
+    pagex[18] = 2,  pagey[18] = 0,  datalist[18] = ECC counter value 2 for page 2, plane 0
+    pagex[19] = 2,  pagey[19] = 0,  datalist[19] = ECC counter value 3 for page 2, plane 0
+    pagex[20] = 2,  pagey[20] = 0,  datalist[20] = ECC counter value 0 for page 2, plane 1
+    pagex[21] = 2,  pagey[21] = 0,  datalist[21] = ECC counter value 1 for page 2, plane 1
+    pagex[22] = 2,  pagey[22] = 0,  datalist[22] = ECC counter value 2 for page 2, plane 1
+    pagex[23] = 2,  pagey[23] = 0,  datalist[23] = ECC counter value 3 for page 2, plane 1
+    pagex[24] = 3,  pagey[24] = 0,  datalist[24] = ECC counter value 0 for page 3, plane 0
+    pagex[25] = 3,  pagey[25] = 0,  datalist[25] = ECC counter value 1 for page 3, plane 0
+    pagex[26] = 3,  pagey[26] = 0,  datalist[26] = ECC counter value 2 for page 3, plane 0
+    pagex[27] = 3,  pagey[27] = 0,  datalist[27] = ECC counter value 3 for page 3, plane 0
+    pagex[28] = 3,  pagey[28] = 0,  datalist[28] = ECC counter value 0 for page 3, plane 1
+    pagex[29] = 3,  pagey[29] = 0,  datalist[29] = ECC counter value 1 for page 3, plane 1
+    pagex[30] = 3,  pagey[30] = 0,  datalist[30] = ECC counter value 2 for page 3, plane 1
+    pagex[31] = 3,  pagey[31] = 0,  datalist[31] = ECC counter value 3 for page 3, plane 1
+</code></pre></td></tr></table></a></p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    USlider pagecount = 0, valuecount = 0;
+    USlider *pagex, *pagey, *datalist, *overflowlist;
+    /*
+      pagecount  is the total number of pages within the range being checked.
+
+      valuecount is the total number of values to be returned.
+      If 256 pages, 2 planes, 4 ECC sectors per plane, valuecount is 2048.
+     */
+
+    FailListAccessHandle flAH:
+    DutCursor dutcsr;
+    UT_DUT dut;
+
+    flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>   (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, testname);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllBit.html">UTL_SetFailListAccessAllBit</a>       (flAH, UT_ON);
+
+    dutcsr = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetDutCursor.html">UTL_GetDutCursor</a>(UT_DDUT);
+    while ( (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutcsr)) != UT_NOMORE ) {
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDut.html">UTL_SetFailListAccessDut</a>  (flAH, dut);
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessXAddr.html">UTL_SetFailListAccessXAddr</a>(flAH, 0x0, PAGES_PER_BLOCK * BLOCK_COUNT - 1);
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessYAddr.html">UTL_SetFailListAccessYAddr</a>(flAH, 0,   COLUMNS_PER_PAGE - 1);
+
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessRecordType.html">UTL_SetFailListAccessRecordType</a>(flAH, UT_FL_RECORD_COUNT_ECC);
+
+        /* Obtain the values for pagecount and valuecount */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListRecordCount.html">UTL_ReadFailListRecordCount</a>(flAH, &amp;pagecount, &amp;valuecount);
+
+        pagex = NULL, pagey = NULL, datalist = NULL, overflowlist = NULL;
+
+        if (pagecount &gt; 0) {
+            pagex = malloc(pagecount * sizeof(USlider));           /* Array to hold page numbers   */
+            pagey = malloc(pagecount * sizeof(USlider));           /* Array to hold column numbers */
+        }
+        if (valuecount &gt; 0) {
+            datalist     = malloc(valuecount * sizeof(USlider));   /* Array to hold count values   */
+            overflowlist = malloc(valuecount * sizeof(USlider));   /* Array to hold overflowlist   */
+        }
+
+        /* Read pagex and pagey           using pagecount  to specify how many to read */
+        /* Read datalist and overflowlist using valuecount to specify how many to read */
+        <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadFailListEccCountList.html">UTL_ReadFailListEccCountList</a>(flAH, pagex, pagey, pagecount, datalist, overflowlist, valuecount);
+
+        int page, plane, num_counters_per_page;
+
+        /* For multi-plane, there will be multiple sets of ECC counts per page */
+        num_counters_per_page = valuecount / pagecount;
+
+        for (page = 0; page &lt; pagecount; page++) {
+            printf(&quot;page[%d] x=%d y=%d (data, overflow)\n&quot;, page, pagex[page], pagey[page]);
+
+            for (plane = 0; plane &lt; num_counters_per_page; plane++) {
+                printf(&quot;(%d %d) &quot;, datalist    [page * num_counters_per_page + plane],
+                                   overflowlist[page * num_counters_per_page + plane]);
+            }
+            printf(&quot;\n&quot;);
+        }
+
+        if (pagex)        { free(pagex);        pagex        = NULL; }
+        if (pagey)        { free(pagey);        pagey        = NULL; }
+        if (datalist)     { free(datalist);     datalist     = NULL; }
+        if (overflowlist) { free(overflowlist); overflowlist = NULL; }
+
+    } /* dutcsr*/
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteCursor.html">UTL_DeleteCursor</a>(dutcsr);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>(flAH);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListTfcCountList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListRrCountList.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

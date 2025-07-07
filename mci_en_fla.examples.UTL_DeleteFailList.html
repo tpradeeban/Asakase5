@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_OverlayFailList.html">[Prev]</A>
+<A HREF="mci_en_mpsjt.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_DeleteFailList">Example of using UTL_DeleteFailList()</a></h1>
+
+<ul><li>
+    <p>
+    Example 1: Delete an existing test name, and test again using the same fail filter configuration settings.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_MeasFct.html">UTL_MeasFct</a>(fctH);
+
+    flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>(flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>(flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>  (flAH, testName);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllDut.html">UTL_SetFailListAccessAllDut</a>    (flAH, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteFailList.html">UTL_DeleteFailList</a>             (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>               (flAH);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_MeasFct.html">UTL_MeasFct</a>(fctH);
+</code></pre></td></tr></table></a></p>
+<ul><li>
+    <p>
+    Example 2: Delete an existing test name, set a different fail filter configuration, and test again.
+    </p>
+</li></ul>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_MeasFct.html">UTL_MeasFct</a>(fctH);
+
+    flAH = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetFailListAccessHandle.html">UTL_GetFailListAccessHandle</a>();
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>(flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>(flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>  (flAH, testName);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllDut.html">UTL_SetFailListAccessAllDut</a>    (flAH, UT_ON);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteFailList.html">UTL_DeleteFailList</a>             (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_DeleteHandle.html">UTL_DeleteHandle</a>               (flAH);
+
+    /* Here, set a different fail filter configuration using
+       MCIs for <a href="mci_en_ffc.html">Setting the Operating Conditions for Fail Filter</a>. */
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_MeasFct.html">UTL_MeasFct</a>(fctH);
+</code></pre></td></tr></table></a></p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_OverlayFailList.html">[Prev]</A>
+<A HREF="mci_en_mpsjt.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

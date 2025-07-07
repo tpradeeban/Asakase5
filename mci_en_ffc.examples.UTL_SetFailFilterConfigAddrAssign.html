@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigTFCOverlayCount.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnStartAddressBit.html">[Next]</A>
+<HR>
+<h1><a name="ffc.examples.UTL_SetFailFilterConfigAddrAssign">Example of using UTL_SetFailFilterConfigAddrAssign()</a></h1>
+
+<p>
+Below is an example of 39 address assignments.
+The maximum number of non-column address assignments is 32 (24 in this example), and this address assignment information is passed to the fail filter when either of the following is satisfied:
+</p>
+<ul><li>
+    <p>
+    When it is returned a TRA address in UBM mode.
+    </p>
+    </li><li><p>
+    When pulls it from hardware in bypass mode.
+    </p>
+</li></ul>
+<p>
+Once this has been set, the address can be computed and used for data being sent to the Fail DB.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    /* 15 address signals for column */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  0, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(0));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  1, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(1));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  2, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(2));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  3, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(3));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  4, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(4));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  5, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(5));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  6, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(6));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  7, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(7));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  8, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(8));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh,  9, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(9));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 10, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(10));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 11, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(11));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 12, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(12));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 13, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(13));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 14, UT_FF_ADDR_ASSIGN_COLUMN, UT_SIG_Y(14));
+
+    /* 8 address signals for page */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 15, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(0));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 16, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(1));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 17, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(2));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 18, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(3));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 19, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(4));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 20, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(5));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 21, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(6));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 22, UT_FF_ADDR_ASSIGN_PAGE,   UT_SIG_X(7));
+
+    /* 2 address signals for plane */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 23, UT_FF_ADDR_ASSIGN_PLANE,  UT_SIG_X(8));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 24, UT_FF_ADDR_ASSIGN_PLANE,  UT_SIG_X(9));
+
+    /* 11 address signals for block */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 25, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(10));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 26, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(11));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 27, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(12));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 28, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(13));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 29, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(14));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 30, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(15));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 31, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(16));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 32, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(17));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 33, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(18));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 34, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(19));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 35, UT_FF_ADDR_ASSIGN_BLOCK,  UT_SIG_X(20));
+
+    /* 3 address signals for chip */
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 36, UT_FF_ADDR_ASSIGN_CHIP,   UT_SIG_X(21));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 37, UT_FF_ADDR_ASSIGN_CHIP,   UT_SIG_X(22));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 38, UT_FF_ADDR_ASSIGN_CHIP,   UT_SIG_X(23));
+</code></pre></td></tr></table></a></p>
+<p>
+<a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>() allows overlapping block and plane address assignments.
+</p>
+<p>
+With the example above, the plane would be assigned one bit of the address, and then the block address would be assigned to higher bits of the address.
+This would result in each block containing two pages.
+</p>
+<p>
+When the assignment is changed as follows, the plane bit can now overlap the lower block bit.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 17, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(2));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 18, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(3));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 19, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(4));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 20, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(5));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 21, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(6));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 22, UT_FF_ADDR_ASSIGN_PAGE,  UT_SIG_X(7));
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 23, UT_FF_ADDR_ASSIGN_PLANE, UT_SIG_X(8)); &lt;--------
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 24, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(8)); &lt;--------
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 25, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(9));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 26, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(10));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 27, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(11));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 28, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(12));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 29, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(13));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 30, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(14));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 31, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(15));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 32, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(16));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 33, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(17));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 34, UT_FF_ADDR_ASSIGN_BLOCK, UT_SIG_X(18));
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 35, UT_FF_ADDR_ASSIGN_CHIP,  UT_SIG_X(19));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 36, UT_FF_ADDR_ASSIGN_CHIP,  UT_SIG_X(20));
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailFilterConfigAddrAssign.html">UTL_SetFailFilterConfigAddrAssign</a>(ffh, 37, UT_FF_ADDR_ASSIGN_CHIP,  UT_SIG_X(21));
+</code></pre></td></tr></table></a></p>
+<p><center><a name="mci_ch12_FailFilter_FIG_AddrAssign"><img src="../../image/mci_ch12_FailFilter_FIG_AddrAssign.png"></a><br></center><p>
+<HR>
+<A HREF="mci_en_ffc.examples.html">[Up]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigTFCOverlayCount.html">[Prev]</A>
+<A HREF="mci_en_ffc.examples.UTL_SetFailFilterConfigColumnStartAddressBit.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListRrCountList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_DeleteFailList.html">[Next]</A>
+<HR>
+<h1><a name="fla.examples.UTL_OverlayFailList">Example of using UTL_OverlayFailList()</a></h1>
+
+<p>
+Below is an example to read failure information from the Fail DB, with two test names specified that are going to be overlaid.
+</p>
+<p><a name=""><table border="1" cellpadding="0" width="80%"><caption align=bottom></caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_NAME);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_ClearFailListAccessTestName.html">UTL_ClearFailListAccessTestName</a>   (flAH);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, &quot;tname1&quot;);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_AddFailListAccessTestName.html">UTL_AddFailListAccessTestName</a>     (flAH, &quot;tname2&quot;);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessDeviceChannel.html">UTL_SetFailListAccessDeviceChannel</a>(flAH, 1);
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessAllDut.html">UTL_SetFailListAccessAllDut</a>       (flAH, UT_ON);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_OverlayFailList.html">UTL_OverlayFailList</a>               (flAH, UT_OFF);
+
+    <a href="../../../ATFSsys/html/en/mci_en_UTL_SetFailListAccessTestSelect.html">UTL_SetFailListAccessTestSelect</a>   (flAH, UT_FL_TESTSEL_OVERLAY);
+</code></pre></td></tr></table></a></p>
+<p>
+If the argument is UT_OFF as shown, Fail DB of tname1 and tname2 are kept.
+</p>
+<p>
+If the argument is UT_ON, Fail DB of tname1 and tname2 are deleted.
+</p>
+<p>
+The last line means the overlay results of tname1 and tname2 will be retrieved from the Fail DB.
+</p>
+<HR>
+<A HREF="mci_en_fla.examples.html">[Up]</A>
+<A HREF="mci_en_fla.examples.UTL_ReadFailListRrCountList.html">[Prev]</A>
+<A HREF="mci_en_fla.examples.UTL_DeleteFailList.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>

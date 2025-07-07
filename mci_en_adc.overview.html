@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>FutureSuite MCI Reference Manual</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#000080" ALINK="#FF0000">
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+<HR>
+<A HREF="mci_en_adc.1.html">[Up]</A>
+<A HREF="mci_en_adc.1.html">[Prev]</A>
+<A HREF="mci_en_adc.1.1.html">[Next]</A>
+<HR>
+<h1><a name="adc.overview">Overview</a></h1>
+
+<p>
+To start a DC test from the ALPG, start the ADC (Analog to Digital Converter) for DC or VS by using the MUT signal of the ALPG.
+</p>
+<p>
+This function is called the ADC start function.
+</p>
+<p>
+The use of the ADC start function allows a DC test to be executed in a specific operation state (pattern cycle).
+</p>
+<ol><li>
+    <p>
+    With respect to the hardware configuration of and restrictions for the T5830, ADC is categorized into two types as follows:
+    </p>
+    <ul><li>
+        <p>
+         UT_ADC_TYPE_DC : DC test of pins by DC
+        </p>
+        </li><li><p>
+         UT_ADC_TYPE_VS : DC test by VS
+        </p>
+    </li></ul>
+    <p>
+    There are three ADCs each for the previously mentioned two ADC types.
+    </p>
+    <p>
+    Moreover, for measuring pins, there are 12 DC channels and 12 PPS channels, which are assigned to ADC1 to ADC3 in channel units.
+    </p>
+    <p><a name="adc.overview.group_T5831"><table border="1" width="80%">
+<caption></caption>
+
+<tr><td valign="middle" bgcolor="#D8FEF0">Group</td><td valign="middle" bgcolor="#D8FEF0">DC/PPS channel</td></tr>
+<tr><td valign="middle">ADC1</td><td valign="middle">1-4</td></tr>
+<tr><td valign="middle">ADC2</td><td valign="middle">5-8</td></tr>
+<tr><td valign="middle">ADC3</td><td valign="middle">9-12</td></tr>
+
+</a></table></p>
+    <ol type="a"><li>
+        <p>
+        Hardware restrictions
+        </p>
+        <p>
+        DC/PPS channels in the same ADC group cannot be used for measurement at the same time.
+        Based on this restriction, up to three DC/PPS channels can be used for measurement simultaneously.
+        </p>
+        <p>
+        Because of the hardware restriction, there are some cases where multiple channels cannot be used for measurement depending on the number of DUTs to be measured in parallel even if there is only one DUT pin or VS to be measured.
+        </p>
+        <p>
+        In such a case, there is a need to divide DUTs into some groups and perform measurement for each group.
+        </p>
+        </li><li><p>
+        DUT groups for ADC
+        </p>
+        <p>
+        MCI <a href="../../../ATFSsys/html/en/mci_en_UTL_SendAdc.html">UTL_SendAdc</a>() for setting operation conditions for ADC is used to divide DUTs that can be measured at one time into groups using DUT pin numbers or VS numbers to be measured, based on the information in the socket program.
+        </p>
+        <p>
+        For a DC test that uses the ADC start function, measurement must be performed for each of these DUT groups.
+        </p>
+        <p>
+        Reference the following flowchart to create a program for performing measurement for each group.
+        </p>
+        <p><a name="adc.DC_flow"><table border="1" cellpadding="0" width="80%"><caption align=bottom>For DC</caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+For DC
+  |-- Setting the number of samples
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDcMeasCnt.html">UTL_SetDcMeasCnt</a>(Number of samples);     // Sets the number of samples.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendDc.html">UTL_SendDc</a>();                       // Sets DC measurement conditions.
+  |
+  |-- Setting the sampling count
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetSamplingRate.html">UTL_SetSamplingRate</a>(Sampling time);
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendSamplingRate.html">UTL_SendSamplingRate</a>();
+  |
+  +&lt;pin:&gt;
+  |
+  |-- Setting the pin condition
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetPinDcConnect.html">UTL_SetPinDcConnect</a>( UT_ON );       // DC connection is Pn = DC here.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendPin.html">UTL_SendPin</a>(Pinlist);          // If the DC channel is different, multiple pins can be measured at one time.
+  |
+  |-- ADC settings
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcPgEnable.html">UTL_SetAdcPgEnable</a>( UT_ON );        // Performs the ADC start from the ALPG.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcStartCycle.html">UTL_SetAdcStartCycle</a>(MUT signal name);  // Specifies the signal name for the ADC start.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcHistoryMode.html">UTL_SetAdcHistoryMode</a>( UT_ON );     // Sets the history mode to ON or OFF.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcPinList.html">UTL_SetAdcPinList</a>(Pinlist);    // Specifies target pins.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendAdc.html">UTL_SendAdc</a>();                      // Creates DUT groups.
+  |
+  |-- Obtaining the largest DUT group number
+  |   gmax = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetAdcDutGroupMaxNumber.html">UTL_GetAdcDutGroupMaxNumber</a>( UT_ADC_TYPE_DC );
+  |
+  |-- for(gnum=0; gnum&lt;=gmax; gnum++)          // Loop on a group basis
+  |    |
+  |    |-- Resetting the history entry count
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_ResetAdcHistoryCount.html">UTL_ResetAdcHistoryCount</a>( UT_ADC_TYPE_DC );  // Unless the history entry count is reset, the previous data remains.
+  |    |
+  |    |-- Setting the DUT group to measure
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteAdcDutGroupNumber.html">UTL_WriteAdcDutGroupNumber</a>( UT_ADC_TYPE_DC, gnum );
+  |    |
+  |    |-- {If necessary, mask DUTs that should not be measured.}
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_SetNoRejectionVs.html">UTL_SetNoRejectionVs</a>();
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_SetResetExclusionByDutBit.html">UTL_SetResetExclusionByDutBit</a>();
+  |    |
+  |    |-- Pattern generation and ADC start during pattern generation
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_StartFct.html">UTL_StartFct</a>();
+  |    |
+  |    |-- Obtaining DUTs that belong to the DUT group number    // DUT cursor
+  |    |       dutc = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetAdcDutGroupDutCursor.html">UTL_GetAdcDutGroupDutCursor</a>( UT_ADC_TYPE_DC, gnum );
+  |    |
+  |    |-- the history entry count
+  |    |       count = Sampling count x number of ADC starts
+  |    |
+  |    |-- while( UT_NOMORE != (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutc)) )  //Loop on a DUT basis
+  |         |-- Reading the measured values
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinDut.html">UTL_SetDctReadPinDut</a> ( dut );                     // Specifies the DUT to be read.
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinType.html">UTL_SetDctReadPinType</a>( UT_PINTYPE_PIN );          // Specifies PIN for TYPE.
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinNumber.html">UTL_SetDctReadPinNumber</a>(Pin number);              // Converts the pin number from the pinlist.
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadDctPinAllHistoryData.html">UTL_ReadDctPinAllHistoryData</a>( &amp;data, count );     // Reads as many data items as are set to the history entry count.
+  |
+  |-- Goes to &lt;pin:&gt; when measuring the next pin
+        </code></pre></td></tr></table></a></p>
+        <p><a name="adc.VS_flow"><table border="1" cellpadding="0" width="80%"><caption align=bottom>For VS</caption><tr><td valign="middle" bgcolor="#FBFDE0"><pre><code>
+
+For VS
+  |
+  |-- Setting the sampling count (MciSamplingRate.crc)
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetSamplingRate.html">UTL_SetSamplingRate</a>(Sampling time);
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendSamplingRate.html">UTL_SendSamplingRate</a>( h );
+  |
+  +-&lt;VS:&gt;
+  |-- Setting the measurement count mode and the number of samples (MciVs.crc)
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetVsMeasCnt.html">UTL_SetVsMeasCnt</a>(Number of samples);     // Sets the number of samples.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendVs.html">UTL_SendVs</a>(VS number);                   // Sets VS measurement conditions.
+  |
+  |-- ADC settings
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcPgEnable.html">UTL_SetAdcPgEnable</a>( UT_ON );        // Performs the ADC start from the ALPG.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcStartCycle.html">UTL_SetAdcStartCycle</a>(MUT signal name);  // Specifies the signal name for the ADC start.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcHistoryMode.html">UTL_SetAdcHistoryMode</a>( UT_ON );     // Sets the history mode to ON or OFF.
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SetAdcPinList.html">UTL_SetAdcPinList</a>(Pinlist);    // Specifies target pins (VS).
+  |        <a href="../../../ATFSsys/html/en/mci_en_UTL_SendAdc.html">UTL_SendAdc</a>();                      // Creates DUT groups.
+  |
+  |-- Obtaining the largest DUT group number
+  |   gmax = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetAdcDutGroupMaxNumber.html">UTL_GetAdcDutGroupMaxNumber</a>( UT_ADC_TYPE_VS );
+  |
+  |-- for(gnum=0; gnum&lt;=gmax; gnum++)          // Loop on a group basis
+  |    |
+  |    |-- Resetting the history entry count
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_ResetAdcHistoryCount.html">UTL_ResetAdcHistoryCount</a>( UT_ADC_TYPE_VS );
+  |    |
+  |    |-- Setting the DUT group to measure
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_WriteAdcDutGroupNumber.html">UTL_WriteAdcDutGroupNumber</a> ( UT_ADC_TYPE_VS, gnum );
+  |    |
+  |    |-- {If necessary, mask DUTs that should not be measured.}
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_SetNoRejectionVs.html">UTL_SetNoRejectionVs</a>();
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_SetResetExclusionByDutBit.html">UTL_SetResetExclusionByDutBit</a>();
+  |    |
+  |    |-- Pattern generation and ADC start during pattern generation
+  |    |       <a href="../../../ATFSsys/html/en/mci_en_UTL_StartFct.html">UTL_StartFct</a>();
+  |    |
+  |    |-- Obtaining DUTs that belong to the DUT group number    // DUT cursor
+  |    |       dutc = <a href="../../../ATFSsys/html/en/mci_en_UTL_GetAdcDutGroupDutCursor.html">UTL_GetAdcDutGroupDutCursor</a>( UT_ADC_TYPE_VS, gnum );
+  |    |
+  |    |-- the history entry count
+  |    |       count = Sampling count x number of ADC starts
+  |    |
+  |    |-- while( UT_NOMORE != (dut = <a href="../../../ATFSsys/html/en/mci_en_UTL_NextDut.html">UTL_NextDut</a>(dutc)) ) { //Loop on a DUT basis
+  |         |
+  |         |-- Reading the measured values (MciDctPin.crc)
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinDut.html">UTL_SetDctReadPinDut</a> ( dut );                       // Specifies the DUT to be read.
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinType.html">UTL_SetDctReadPinType</a>( UT_PINTYPE_VS );             // Specifies VS for TYPE.
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_SetDctReadPinNumber.html">UTL_SetDctReadPinNumber</a>(VS number);                  // VS pin number
+  |                 <a href="../../../ATFSsys/html/en/mci_en_UTL_ReadDctPinAllHistoryData.html">UTL_ReadDctPinAllHistoryData</a>( &amp;data, count );       // Reads as many data items as are set to the history entry count.
+  |
+  |-- Goes to &lt;vs:&gt; when measuring the next VS
+        </code></pre></td></tr></table></a></p>
+        <ul><li>
+            <p>
+            Because the preceding flowchart is intended to express the flow of processing and data, obtaining of handles and handles to be specified for arguments are omitted.
+            </p>
+        </li></ul>
+    </li></ol>
+    </li><li><p>
+    T5503HS2
+    </p>
+    <ol type="a"><li>
+        <p>
+        The ADC start function can be used only for VSs (PPSs).
+        </p>
+        </li><li><p>
+        The function that saves histories cannot be used.
+        Histories are reset every time an ADC start is performed.
+        </p>
+    </li></ol>
+</li></ol>
+<HR>
+<A HREF="mci_en_adc.1.html">[Up]</A>
+<A HREF="mci_en_adc.1.html">[Prev]</A>
+<A HREF="mci_en_adc.1.1.html">[Next]</A>
+<HR>
+<A HREF="mci_en_TOC.html">Table of Contents</A>
+<DIV ALIGN=RIGHT>FutureSuite MCI Reference Manual</DIV>
+</BODY>
+</HTML>
